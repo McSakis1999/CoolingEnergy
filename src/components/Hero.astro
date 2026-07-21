@@ -1,0 +1,169 @@
+---
+// src/components/Hero.astro
+import { businessInfo } from '../data/businessInfo.js';
+
+// Sanitize phone number for international Viber deep-link format (+3069XXXXXXXX)
+const cleanPhone = businessInfo.phone.replace(/[^0-9]/g, '');
+const viberUrl = businessInfo.viberUrl || `viber://chat?number=%2B30${cleanPhone}`;
+---
+
+<section class="relative bg-slate-950 text-white py-20 md:py-28 overflow-hidden">
+  
+  <!-- Background Image Overlay with Gradient & Dark Scrim -->
+  <div class="absolute inset-0 z-0">
+    <img 
+      src="/images/hero-bg.jpg" 
+      alt="HVAC Technical Service Background" 
+      class="w-full h-full object-cover object-center opacity-25 filter brightness-75 scale-105 transform animate-pulse duration-[10000ms]"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/70"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-transparent to-slate-950"></div>
+  </div>
+
+  <!-- Decorative Animated Ambient Glows -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute bottom-10 right-10 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <!-- Grid Pattern Texture -->
+  <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      
+      <!-- Left Column: Copy & Primary Actions -->
+      <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+        
+        <!-- Emergency Availability Badge -->
+        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-800/80 border border-blue-500/30 text-blue-300 text-xs font-semibold uppercase tracking-wider backdrop-blur-md shadow-lg shadow-blue-950/40">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+          </span>
+          <span>{businessInfo.workingHours.emergency}</span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15]">
+          Άμεση Τεχνική Υποστήριξη <br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-200">
+            Ψύξης & Θέρμανσης
+          </span> <br />
+          <span class="text-slate-200 text-3xl sm:text-4xl lg:text-5xl font-extrabold">σε Βόλο & Πήλιο</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-slate-300 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+          Εγκατάσταση, εξειδικευμένη συντήρηση και άμεση αποκατάσταση βλαβών σε κλιματιστικά, αντλίες θερμότητας και λέβητες. Υπεύθυνη εργασία με <span class="text-white font-semibold underline decoration-blue-400/50 underline-offset-4">γραπτή εγγύηση</span>.
+        </p>
+
+        <!-- CTA Buttons Group -->
+        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+          
+          <!-- Primary Call Button with Pulse & Glow -->
+          <a 
+            href={`tel:${businessInfo.phone}`}
+            class="group relative w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold text-lg shadow-xl shadow-blue-600/30 flex items-center justify-center gap-3 transition-all transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 border border-blue-400/30"
+          >
+            <div class="p-2 rounded-xl bg-white/10 group-hover:bg-white/20 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <span>Τηλεφωνική Κλήση</span>
+          </a>
+
+          <!-- Viber Quick Chat Button -->
+          <a 
+            href={viberUrl}
+            class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#7360f2]/90 hover:bg-[#7360f2] text-white font-bold text-lg border border-purple-300/30 shadow-xl shadow-purple-950/30 flex items-center justify-center gap-3 transition-all transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 backdrop-blur-md"
+            aria-label="Viber"
+          >
+            <svg class="w-6 h-6 fill-current text-white" viewBox="0 0 24 24">
+              <path d="M19.38 4.62A10.74 10.74 0 0 0 12 1.5C6.2 1.5 1.5 6.2 1.5 12c0 2.22.68 4.28 1.84 5.98L2 22l4.18-1.32A10.45 10.45 0 0 0 12 22.5c5.8 0 10.5-4.7 10.5-10.5 0-2.87-1.12-5.57-3.12-7.38zm-1.88 12.3c-.3.84-1.74 1.6-2.42 1.66-.62.06-1.42.28-4.72-1.08-3.92-1.62-6.42-5.58-6.62-5.84-.2-.26-1.6-2.12-1.6-4.04 0-1.92 1.02-2.86 1.38-3.24.36-.38.78-.48 1.04-.48.26 0 .52.02.74.02.24 0 .56-.08.88.68.32.76 1.08 2.64 1.18 2.84.1.2.16.44.02.72-.14.28-.22.44-.44.7-.22.26-.46.58-.66.78-.22.22-.44.46-.18.9.26.44 1.16 1.92 2.5 3.12 1.72 1.54 3.18 2.02 3.62 2.24.44.22.7.18.96-.12.26-.3.12-.86 1.42-1.5.3-.14.62-.06.88.06.26.12 1.66.78 1.94.92.28.14.48.22.54.34.08.14.08.82-.22 1.66z"/>
+            </svg>
+            <span>Μήνυμα Viber</span>
+          </a>
+
+        </div>
+
+        <!-- Service Area Tags -->
+        <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-2 text-xs text-slate-400">
+          <span class="font-medium text-slate-300 flex items-center gap-1">
+            📍 Περιοχές:
+          </span>
+          {businessInfo.serviceAreas.slice(0, 5).map((area) => (
+            <span class="px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300 font-medium">
+              {area}
+            </span>
+          ))}
+          <span class="px-3 py-1 rounded-lg bg-blue-950/60 border border-blue-500/30 text-blue-300 font-semibold">
+            + όλο το Πήλιο
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Animated Visual Glassmorphic Card -->
+      <div class="lg:col-span-5 flex justify-center">
+        <div class="relative w-full max-w-md group">
+          
+          <!-- Decorative Glow Behind Card -->
+          <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+
+          <!-- Glass Card -->
+          <div class="relative w-full bg-slate-900/80 backdrop-blur-xl border border-slate-700/80 rounded-3xl p-7 shadow-2xl space-y-6">
+            
+            <!-- Floating Rating Badge -->
+            <div class="absolute -top-4 -right-2 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 px-3.5 py-1.5 rounded-full font-black text-xs shadow-lg flex items-center gap-1.5 border border-amber-300/40">
+              <span>★ 5.0</span>
+              <span class="text-[10px] uppercase tracking-wider font-bold text-slate-900">Google Reviews</span>
+            </div>
+
+            <!-- Header Info -->
+            <div class="flex items-center gap-4">
+              <div class="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-600 text-white flex items-center justify-center font-black text-xl shadow-lg shadow-blue-500/30 border border-white/20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-xl text-white tracking-tight">{businessInfo.ownerName}</h3>
+                <p class="text-xs text-cyan-300 font-medium mt-0.5">Πιστοποιημένος Τεχνικός Ψύξης & Θέρμανσης</p>
+              </div>
+            </div>
+
+            <!-- Quick Details List -->
+            <div class="border-t border-slate-800 pt-5 space-y-3.5">
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-slate-400">Ωράριο Λειτουργίας</span>
+                <span class="text-slate-200 font-semibold">{businessInfo.workingHours.hours}</span>
+              </div>
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-slate-400">Έδρα</span>
+                <span class="text-slate-200 font-semibold">{businessInfo.address.city}, {businessInfo.address.region}</span>
+              </div>
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-slate-400">Επισκέψεις Κατ' Οίκον</span>
+                <span class="text-emerald-400 font-bold flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  Βόλος & Πήλιο
+                </span>
+              </div>
+            </div>
+
+            <!-- Guarantee Callout -->
+            <div class="p-3.5 rounded-xl bg-blue-950/50 border border-blue-500/20 text-xs text-blue-200 flex items-center gap-3">
+              <svg class="w-5 h-5 text-blue-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              <span>Παρέχεται <strong>γραπτή εγγύηση</strong> καλής λειτουργίας σε όλες τις εργασίες.</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

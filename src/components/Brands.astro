@@ -1,0 +1,86 @@
+---
+// src/components/Brands.astro
+
+const brands = [
+  { name: 'Daikin', logo: '/images/brands/daikin-logo-1-.svg' },
+  { name: 'Mitsubishi Electric', logo: '/images/brands/mitsubishi.svg' },
+  { name: 'Fujitsu', logo: '/images/brands/fujitsu-logo.svg' },
+  { name: 'Inventor', logo: '/images/brands/inventor.png' },
+  { name: 'Carrier', logo: '/images/brands/carrier-heat-ac-1.svg' },
+  { name: 'Midea', logo: '/images/brands/midea-1.svg' },
+  { name: 'LG', logo: '/images/brands/lg-electronics.svg' },
+  { name: 'Toshiba', logo: '/images/brands/toshiba-3.svg' },
+  { name: 'Bosch', logo: '/images/brands/bosch-logo-simple.svg' },
+];
+
+// Duplicate brands array for seamless loop animation
+const marqueeBrands = [...brands, ...brands];
+---
+
+<section class="py-14 bg-gradient-to-b from-slate-50 via-slate-100/80 to-slate-50 border-y border-slate-200/80 overflow-hidden relative">
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center space-y-2">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200/60 text-blue-700 text-[11px] font-bold uppercase tracking-widest shadow-xs">
+      <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+      Εξειδικευμένο Σέρβις & Εγκαταστάσεις
+    </div>
+    <h3 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+      Υποστηριζόμενες Εταιρείες & Κατασκευαστές
+    </h3>
+  </div>
+
+  <!-- Marquee Wrapper with Side Fades -->
+  <div class="relative w-full overflow-hidden group">
+    
+    <!-- Gradient Fade Masks on Left and Right Sides -->
+    <div class="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none"></div>
+
+    <!-- Scrolling Track -->
+    <div class="py-3 flex items-center gap-6 w-max animate-marquee group-hover:[animation-play-state:paused]">
+      {marqueeBrands.map((brand) => (
+        <div class="flex-shrink-0 min-w-[140px] h-16 px-6 py-3 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-center gap-3 hover:border-blue-300 hover:shadow-md hover:scale-105 transition-all duration-300">
+          
+          {brand.logo ? (
+            <>
+              <!-- Image Logo (Shows by default) -->
+              <img 
+                src={brand.logo} 
+                alt={`${brand.name} logo`} 
+                class="h-7 w-auto max-w-[120px] object-contain filter grayscale opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
+              />
+              <!-- Text Label (Hidden initially, revealed if image fails) -->
+              <span class="hidden font-bold text-slate-800 text-sm sm:text-base tracking-tight whitespace-nowrap">
+                {brand.name}
+              </span>
+            </>
+          ) : (
+            /* Text Label directly if no logo path provided */
+            <span class="font-bold text-slate-800 text-sm sm:text-base tracking-tight whitespace-nowrap">
+              {brand.name}
+            </span>
+          )}
+          
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Custom Continuous Smooth Marquee Keyframes */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+</style>

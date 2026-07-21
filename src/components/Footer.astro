@@ -1,0 +1,145 @@
+---
+// src/components/Footer.astro
+import { businessInfo } from '../data/businessInfo.js';
+
+const currentYear = new Date().getFullYear();
+
+// Sanitize phone number for international Viber deep-link format (+3069XXXXXXXX)
+const cleanPhone = businessInfo.phone.replace(/[^0-9]/g, '');
+const viberUrl = businessInfo.viberUrl || `viber://chat?number=%2B30${cleanPhone}`;
+---
+
+<footer class="bg-slate-900 text-slate-300 pt-16 pb-24 md:pb-12 border-t border-slate-800" itemscope itemtype="https://schema.org/HVACBusiness">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+      
+      <!-- Column 1: Business Identity & NAP -->
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-xl font-black text-white tracking-tight" itemprop="name">{businessInfo.name}</h3>
+          <p class="text-xs text-blue-400 font-semibold tracking-wider uppercase mt-0.5">{businessInfo.tagline}</p>
+        </div>
+        <p class="text-sm text-slate-400 leading-relaxed">
+          Επαγγελματικές υπηρεσίες ψύξης, θέρμανσης και κλιματισμού. Άμεση εξυπηρέτηση σε όλο το πολεοδομικό συγκρότημα Βόλου και τα χωριά του Πηλίου.
+        </p>
+        <div class="text-xs text-slate-400 pt-2">
+          <p><strong class="text-slate-300">Υπεύθυνος:</strong> <span itemprop="founder">{businessInfo.ownerName}</span></p>
+        </div>
+      </div>
+
+      <!-- Column 2: Direct Contact Details -->
+      <div class="space-y-4">
+        <h4 class="text-sm font-bold text-white uppercase tracking-wider">Επικοινωνία</h4>
+        <ul class="space-y-3 text-sm">
+          
+          <!-- Address -->
+          <li class="flex items-start gap-3" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <svg class="w-5 h-5 text-blue-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>
+              <span itemprop="streetAddress">{businessInfo.address.street}</span>, 
+              <span itemprop="addressLocality">{businessInfo.address.city}</span>, 
+              <span itemprop="postalCode">{businessInfo.address.postalCode}</span>
+            </span>
+          </li>
+
+          <!-- Phone -->
+          <li class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-blue-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <a href={`tel:${businessInfo.phone}`} class="hover:text-white transition-colors font-semibold" itemprop="telephone">
+              {businessInfo.phoneFormatted || businessInfo.phone}
+            </a>
+          </li>
+
+          <!-- Email -->
+          <li class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-blue-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <a href={`mailto:${businessInfo.email}`} class="hover:text-white transition-colors" itemprop="email">
+              {businessInfo.email}
+            </a>
+          </li>
+
+          <!-- Working Hours -->
+          {businessInfo.workingHours && (
+            <li class="flex items-start gap-3 pt-1">
+              <svg class="w-5 h-5 text-blue-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p class="text-slate-200">{businessInfo.workingHours.days}: {businessInfo.workingHours.hours}</p>
+                <p class="text-xs text-emerald-400 font-semibold mt-0.5">{businessInfo.workingHours.emergency}</p>
+              </div>
+            </li>
+          )}
+
+        </ul>
+      </div>
+
+      <!-- Column 3: Service Areas (Crucial for Local SEO) -->
+      <div id="areas" class="space-y-4 lg:col-span-2">
+        <h4 class="text-sm font-bold text-white uppercase tracking-wider">Περιοχές Εξυπηρέτησης</h4>
+        <p class="text-xs text-slate-400">
+          Παρέχουμε άμεση κάλυψη και κατ' οίκον επισκέψεις στις παρακάτω περιοχές:
+        </p>
+        <div class="flex flex-wrap gap-2 pt-1">
+          {businessInfo.serviceAreas.map((area) => (
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700/80 text-xs text-slate-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+              {area}
+            </span>
+          ))}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Copyright / Bottom Row -->
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+      <p>© {currentYear} {businessInfo.name}. Με την επιφύλαξη παντός δικαιώματος.</p>
+      <div class="flex gap-6">
+        <a href="#services" class="hover:text-slate-400 transition-colors py-1">Υπηρεσίες</a>
+        <a href="#about" class="hover:text-slate-400 transition-colors py-1">Σχετικά</a>
+        <a href="#contact" class="hover:text-slate-400 transition-colors py-1">Επικοινωνία</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Persistent Mobile Sticky Call & Viber Bar (Visible only on small screens) -->
+  <div class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 p-3 md:hidden flex items-center justify-between gap-3 shadow-2xl">
+    
+    <!-- Phone Call Button -->
+    <a
+      href={`tel:${businessInfo.phone}`}
+      class="flex-1 py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 active:scale-95 transition-all"
+      aria-label="Άμεση τηλεφωνική κλήση"
+    >
+      <svg class="w-5 h-5 animate-pulse" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+      </svg>
+      <span>Τηλέφωνο</span>
+    </a>
+
+    <!-- Viber Button -->
+    <a
+      href={viberUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex-1 py-3 px-4 rounded-xl bg-[#7360f2] hover:bg-[#6251db] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-purple-950/30 active:scale-95 transition-all"
+      aria-label="Αποστολή μηνύματος στο Viber"
+    >
+      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M19.38 4.62A10.74 10.74 0 0 0 12 1.5C6.2 1.5 1.5 6.2 1.5 12c0 2.22.68 4.28 1.84 5.98L2 22l4.18-1.32A10.45 10.45 0 0 0 12 22.5c5.8 0 10.5-4.7 10.5-10.5 0-2.87-1.12-5.57-3.12-7.38zm-1.88 12.3c-.3.84-1.74 1.6-2.42 1.66-.62.06-1.42.28-4.72-1.08-3.92-1.62-6.42-5.58-6.62-5.84-.2-.26-1.6-2.12-1.6-4.04 0-1.92 1.02-2.86 1.38-3.24.36-.38.78-.48 1.04-.48.26 0 .52.02.74.02.24 0 .56-.08.88.68.32.76 1.08 2.64 1.18 2.84.1.2.16.44.02.72-.14.28-.22.44-.44.7-.22.26-.46.58-.66.78-.22.22-.44.46-.18.9.26.44 1.16 1.92 2.5 3.12 1.72 1.54 3.18 2.02 3.62 2.24.44.22.7.18.96-.12.26-.3.12-.86 1.42-1.5.3-.14.62-.06.88.06.26.12 1.66.78 1.94.92.28.14.48.22.54.34.08.14.08.82-.22 1.66z"/>
+      </svg>
+      <span>Viber</span>
+    </a>
+
+  </div>
+</footer>

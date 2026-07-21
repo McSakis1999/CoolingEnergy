@@ -1,0 +1,118 @@
+---
+// src/components/Header.astro
+import { businessInfo } from '../data/businessInfo.js';
+
+const cleanPhone = businessInfo.phone.replace(/[^0-9]/g, '');
+const viberUrl = businessInfo.viberUrl || `viber://chat?number=%2B30${cleanPhone}`;
+---
+
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-sm transition-all">
+  
+  <!-- Top Utility Bar (Adds a premium touch) -->
+  <div class="hidden sm:block bg-slate-900 text-slate-300 text-xs py-1.5 px-4 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        <span class="flex items-center gap-1.5 text-emerald-400 font-medium">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          {businessInfo.workingHours?.emergency || '24/7 Άμεση Εξυπηρέτηση'}
+        </span>
+        <span class="text-slate-600">|</span>
+        <span class="text-slate-400">
+          📍 {'Βόλος'} & {'Όλο το Πήλιο'}
+        </span>
+      </div>
+
+      <div class="flex items-center gap-4 text-slate-400">
+        <a href={`mailto:${businessInfo.email}`} class="hover:text-blue-400 transition-colors">
+          {businessInfo.email}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      
+      <!-- Logo / Brand Section -->
+      <a href="#" class="flex items-center gap-3.5 group">
+        <div class="relative flex items-center justify-center p-1">
+          <img 
+            src="/images/logo.png" 
+            alt="Cooling Energy Logo" 
+            class="h-16 w-auto object-contain"
+            loading="eager"
+          />
+        </div>
+        <div class="flex flex-col">
+          <span class="text-2xl font-black tracking-tight text-slate-900 leading-none group-hover:text-blue-600 transition-colors">
+            Cooling<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Energy</span>
+          </span>
+          <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase mt-1">
+            Ψυξη • Θερμανση • Κλιματισμος
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-1 bg-slate-100/80 p-1.5 rounded-full border border-slate-200/60 text-sm font-semibold text-slate-700">
+        <a 
+          href="#services" 
+          class="px-5 py-2 rounded-full hover:bg-white hover:text-blue-600 hover:shadow-sm transition-all duration-200"
+        >
+          Υπηρεσίες
+        </a>
+        <a 
+          href="#service-areas" 
+          class="px-5 py-2 rounded-full hover:bg-white hover:text-blue-600 hover:shadow-sm transition-all duration-200"
+        >
+          Περιοχές
+        </a>
+        <a 
+          href="#about" 
+          class="px-5 py-2 rounded-full hover:bg-white hover:text-blue-600 hover:shadow-sm transition-all duration-200"
+        >
+          Σχετικά
+        </a>
+        <a 
+          href="#contact" 
+          class="px-5 py-2 rounded-full hover:bg-white hover:text-blue-600 hover:shadow-sm transition-all duration-200"
+        >
+          Επικοινωνία
+        </a>
+      </nav>
+
+      <!-- Action Call & Viber Group -->
+      <div class="flex items-center gap-2.5">
+        
+        <!-- Viber Quick Icon (Desktop & Tablet) -->
+        <a
+          href={viberUrl}
+          aria-label="Επικοινωνία μέσω Viber"
+          class="hidden sm:inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#7360f2]/10 hover:bg-[#7360f2] text-[#7360f2] hover:text-white transition-all duration-300 border border-[#7360f2]/20 shadow-sm active:scale-95"
+        >
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M19.38 4.62A10.74 10.74 0 0 0 12 1.5C6.2 1.5 1.5 6.2 1.5 12c0 2.22.68 4.28 1.84 5.98L2 22l4.18-1.32A10.45 10.45 0 0 0 12 22.5c5.8 0 10.5-4.7 10.5-10.5 0-2.87-1.12-5.57-3.12-7.38zm-1.88 12.3c-.3.84-1.74 1.6-2.42 1.66-.62.06-1.42.28-4.72-1.08-3.92-1.62-6.42-5.58-6.62-5.84-.2-.26-1.6-2.12-1.6-4.04 0-1.92 1.02-2.86 1.38-3.24.36-.38.78-.48 1.04-.48.26 0 .52.02.74.02.24 0 .56-.08.88.68.32.76 1.08 2.64 1.18 2.84.1.2.16.44.02.72-.14.28-.22.44-.44.7-.22.26-.46.58-.66.78-.22.22-.44.46-.18.9.26.44 1.16 1.92 2.5 3.12 1.72 1.54 3.18 2.02 3.62 2.24.44.22.7.18.96-.12.26-.3.12-.86 1.42-1.5.3-.14.62-.06.88.06.26.12 1.66.78 1.94.92.28.14.48.22.54.34.08.14.08.82-.22 1.66z"/>
+          </svg>
+        </a>
+
+        <!-- Main Click-To-Call Button -->
+        <a
+          href={`tel:${businessInfo.phone}`}
+          class="inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold text-sm transition-all shadow-lg shadow-blue-600/25 active:scale-95 border border-blue-400/20"
+        >
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+          </span>
+          <span>{businessInfo.phoneFormatted || businessInfo.phone}</span>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</header>

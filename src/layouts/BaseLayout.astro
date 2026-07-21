@@ -1,0 +1,74 @@
+---
+// src/layouts/BaseLayout.astro
+import '../styles/global.css';
+import { businessInfo } from '../data/businessInfo.js';
+
+const {
+  title = "Ψύξη - Θέρμανση Βόλος & Πήλιο | Εγκαταστάσεις & Συντήρηση HVAC",
+  description = "Εξειδικευμένες υπηρεσίες κλιματισμού, αντλιών θερμότητας & συντήρησης λεβήτων σε Βόλο και Πήλιο. Άμεση εξυπηρέτηση, τεχνική υποστήριξη 24/7.",
+  image = "/images/og-share.jpg",
+  canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url.href,
+} = Astro.props;
+
+// Construct full image URL for Open Graph
+const ogImageUrl = new URL(image, Astro.url.origin).href;
+---
+
+<!DOCTYPE html>
+<html lang="el" class="scroll-smooth">
+  <head>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Google Fonts: Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="HVAC Βόλος, κλιματισμός Βόλος, αντλίες θερμότητας Πήλιο, συντήρηση λεβήτων, επισκευή A/C, τεχνικός ψυκτικός" />
+    <meta name="author" content={businessInfo.name} />
+
+    <!-- Geo-Targeting Metadata for Local SEO -->
+    <meta name="geo.region" content="GR-E" />
+    <meta name="geo.placename" content="Volos" />
+    <meta name="geo.position" content={`${businessInfo.geo.latitude};${businessInfo.geo.longitude}`} />
+    <meta name="ICBM" content={`${businessInfo.geo.latitude}, ${businessInfo.geo.longitude}`} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="el_GR" />
+    <meta property="og:site_name" content={businessInfo.name} />
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url.href} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImageUrl} />
+
+    <!-- Schema.org JSON-LD Injection Slot -->
+    <slot name="schema" />
+  </head>
+  <body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-blue-600 selection:text-white flex flex-col min-h-screen">
+    
+    <!-- Main Page Content -->
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+  </body>
+</html>
