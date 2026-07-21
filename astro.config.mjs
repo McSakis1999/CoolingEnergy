@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
   site: "https://mcsakis1999.github.io",
-  // base: "/CoolingEnergy",
+  base: "/CoolingEnergy",
 
   vite: {
     plugins: [tailwindcss()],

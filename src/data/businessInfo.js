@@ -1,9 +1,9 @@
 // src/data/businessInfo.js
 
 export const businessInfo = {
-  name: "HVAC Volos & Pelion",
-  legalName: "HVAC Volos & Pelion Services",
-  ownerName: "Γιώργος Παπαδόπουλος", // Replace with your friend's name
+  name: "Cooling Energy",
+  legalName: "Cooling Energy",
+  ownerName: "Γιώργος Μούτος", // Replace with your friend's name
   tagline: "Εξειδικευμένες Λύσεις Ψύξης & Θέρμανσης σε Βόλο και Πήλιο",
   phone: "+30 690 000 0000",
   phoneFormatted: "690 000 0000",

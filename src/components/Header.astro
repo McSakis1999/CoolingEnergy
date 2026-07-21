@@ -4,6 +4,7 @@ import { businessInfo } from '../data/businessInfo.js';
 
 const cleanPhone = businessInfo.phone.replace(/[^0-9]/g, '');
 const viberUrl = businessInfo.viberUrl || `viber://chat?number=%2B30${cleanPhone}`;
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-sm transition-all">
@@ -38,10 +39,10 @@ const viberUrl = businessInfo.viberUrl || `viber://chat?number=%2B30${cleanPhone
     <div class="flex items-center justify-between h-20">
       
       <!-- Logo / Brand Section -->
-      <a href="#" class="flex items-center gap-3.5 group">
+      <a href={baseUrl} class="flex items-center gap-3.5 group">
         <div class="relative flex items-center justify-center p-1">
           <img 
-            src="/images/logo.png" 
+            src={`${baseUrl}images/logo.png`} 
             alt="Cooling Energy Logo" 
             class="h-16 w-auto object-contain"
             loading="eager"
@@ -60,25 +61,25 @@ const viberUrl = businessInfo.viberUrl || `viber://chat?number=%2B30${cleanPhone
       <!-- Desktop Navigation Links -->
       <nav class="hidden md:flex items-center gap-1 bg-slate-100/80 p-1.5 rounded-full border border-slate-200/60 text-sm font-semibold text-slate-700">
         <a 
-          href="#services" 
+          href={`${baseUrl}#services`} 
           class="px-5 py-2 rounded-full hover:bg-white hover:text-blue-600 hover:shadow-sm transition-all duration-200"
         >
           Υπηρεσίες
         </a>
         <a 
-          href="#service-areas" 
+          href={`${baseUrl}#service-areas`} 
           class="px-5 py-2 rounded-full hover:bg-white hover:text-blue-600 hover:shadow-sm transition-all duration-200"
         >
           Περιοχές
         </a>
         <a 
-          href="#about" 
+          href={`${baseUrl}#about`} 
           class="px-5 py-2 rounded-full hover:bg-white hover:text-blue-600 hover:shadow-sm transition-all duration-200"
         >
           Σχετικά
         </a>
         <a 
-          href="#contact" 
+          href={`${baseUrl}#contact`} 
           class="px-5 py-2 rounded-full hover:bg-white hover:text-blue-600 hover:shadow-sm transition-all duration-200"
         >
           Επικοινωνία
