@@ -1,146 +1,25 @@
 ---
-// src/components/Footer.astro
 import { businessInfo } from '../data/businessInfo.js';
-
-const currentYear = new Date().getFullYear();
-const baseUrl = import.meta.env.BASE_URL;
-
-// Sanitize phone number for international Viber deep-link format (+3069XXXXXXXX)
-const cleanPhone = businessInfo.phone.replace(/[^0-9]/g, '');
-const viberUrl = businessInfo.viberUrl || `viber://chat?number=%2B30${cleanPhone}`;
+import { withBase, serviceUrl } from '../utils/urls.js';
+const services = [['episkevi-klimatistikon','Κλιματιστικά'],['episkevi-psygeion','Ψυγεία'],['episkevi-plyntirion','Πλυντήρια ρούχων'],['episkevi-ilektrikon-kouzinon','Κουζίνες & φούρνοι']];
+const pages = [['giorgos-moutos/','Γιώργος Μούτος'],['omada/','Η ομάδα'],['erga/','Από τη δουλειά μας'],['faq/','Συχνές ερωτήσεις'],['perioxes/','Περιοχές εξυπηρέτησης']];
+const socials = (businessInfo.socialLinks || []).filter(link => /^https:\/\//i.test(link.url));
 ---
-
-<footer class="bg-slate-900 text-slate-300 pt-16 pb-24 md:pb-12 border-t border-slate-800" itemscope itemtype="https://schema.org/HVACBusiness">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
-      
-      <!-- Column 1: Business Identity & NAP -->
-      <div class="space-y-4">
-        <div>
-          <h3 class="text-xl font-black text-white tracking-tight" itemprop="name">{businessInfo.name}</h3>
-          <p class="text-xs text-blue-400 font-semibold tracking-wider uppercase mt-0.5">{businessInfo.tagline}</p>
-        </div>
-        <p class="text-sm text-slate-400 leading-relaxed">
-          Επαγγελματικές υπηρεσίες ψύξης, θέρμανσης και κλιματισμού. Άμεση εξυπηρέτηση σε όλο το πολεοδομικό συγκρότημα Βόλου και τα χωριά του Πηλίου.
-        </p>
-        <div class="text-xs text-slate-400 pt-2">
-          <p><strong class="text-slate-300">Υπεύθυνος:</strong> <span itemprop="founder">{businessInfo.ownerName}</span></p>
-        </div>
-      </div>
-
-      <!-- Column 2: Direct Contact Details -->
-      <div class="space-y-4">
-        <h4 class="text-sm font-bold text-white uppercase tracking-wider">Επικοινωνία</h4>
-        <ul class="space-y-3 text-sm">
-          
-          <!-- Address -->
-          <li class="flex items-start gap-3" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-            <svg class="w-5 h-5 text-blue-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span>
-              <span itemprop="streetAddress">{businessInfo.address.street}</span>, 
-              <span itemprop="addressLocality">{businessInfo.address.city}</span>, 
-              <span itemprop="postalCode">{businessInfo.address.postalCode}</span>
-            </span>
-          </li>
-
-          <!-- Phone -->
-          <li class="flex items-center gap-3">
-            <svg class="w-5 h-5 text-blue-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
-            <a href={`tel:${businessInfo.phone}`} class="hover:text-white transition-colors font-semibold" itemprop="telephone">
-              {businessInfo.phoneFormatted || businessInfo.phone}
-            </a>
-          </li>
-
-          <!-- Email -->
-          <li class="flex items-center gap-3">
-            <svg class="w-5 h-5 text-blue-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <a href={`mailto:${businessInfo.email}`} class="hover:text-white transition-colors" itemprop="email">
-              {businessInfo.email}
-            </a>
-          </li>
-
-          <!-- Working Hours -->
-          {businessInfo.workingHours && (
-            <li class="flex items-start gap-3 pt-1">
-              <svg class="w-5 h-5 text-blue-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div>
-                <p class="text-slate-200">{businessInfo.workingHours.days}: {businessInfo.workingHours.hours}</p>
-                <p class="text-xs text-emerald-400 font-semibold mt-0.5">{businessInfo.workingHours.emergency}</p>
-              </div>
-            </li>
-          )}
-
-        </ul>
-      </div>
-
-      <!-- Column 3: Service Areas (Crucial for Local SEO) -->
-      <div id="areas" class="space-y-4 lg:col-span-2">
-        <h4 class="text-sm font-bold text-white uppercase tracking-wider">Περιοχές Εξυπηρέτησης</h4>
-        <p class="text-xs text-slate-400">
-          Παρέχουμε άμεση κάλυψη και κατ' οίκον επισκέψεις στις παρακάτω περιοχές:
-        </p>
-        <div class="flex flex-wrap gap-2 pt-1">
-          {businessInfo.serviceAreas.map((area) => (
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700/80 text-xs text-slate-300">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-              {area}
-            </span>
-          ))}
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Copyright / Bottom Row -->
-    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-      <p>© {currentYear} {businessInfo.name}. Με την επιφύλαξη παντός δικαιώματος.</p>
-      <div class="flex gap-6">
-        <a href={`${baseUrl}#services`} class="hover:text-slate-400 transition-colors py-1">Υπηρεσίες</a>
-        <a href={`${baseUrl}#about`} class="hover:text-slate-400 transition-colors py-1">Σχετικά</a>
-        <a href={`${baseUrl}#contact`} class="hover:text-slate-400 transition-colors py-1">Επικοινωνία</a>
-      </div>
-    </div>
-
+<footer class="site-footer">
+<div class="container">
+  <div class="footer-intro"><div><p class="eyebrow">COOLINGENERGY · ΒΟΛΟΣ & ΠΗΛΙΟ</p><h2>Φροντίδα για το σπίτι σας.<br /><span>Ξεκινά με μια επικοινωνία.</span></h2></div><a class="button" href={businessInfo.phone ? 'tel:'+businessInfo.phone : withBase('#contact')}>{businessInfo.phone ? 'Καλέστε μας' : 'Στοιχεία επικοινωνίας'} <span aria-hidden="true">↗</span></a></div>
+  <div class="footer-columns">
+    <div class="footer-identity"><a class="footer-brand" href={withBase()}>Cooling<span>Energy</span></a><p class="footer-owner">{businessInfo.ownerName}</p><p>Κλιματιστικά, ψυγεία, πλυντήρια και ηλεκτρικές κουζίνες. Τεχνική φροντίδα στον Βόλο και τα χωριά του Πηλίου.</p><div class="footer-social"><h3>Βρείτε μας online</h3>{socials.length ? <ul class="social-links">{socials.map(link=><li><a href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.label+' (ανοίγει σε νέα καρτέλα)'}>{link.label} <span aria-hidden="true">↗</span></a></li>)}</ul> : <><ul class="social-links social-samples"><li><span>Instagram ↗</span></li><li><span>Facebook ↗</span></li></ul><p class="sample-note">Ενδεικτικά προφίλ · οι σύνδεσμοι θα προστεθούν.</p></>}</div></div>
+    <nav aria-label="Υπηρεσίες στο υποσέλιδο"><h3>Υπηρεσίες</h3><ul>{services.map(([slug,label])=><li><a href={serviceUrl(slug)}>{label}</a></li>)}<li><a class="footer-all" href={withBase('#services')}>Όλες οι υπηρεσίες <span aria-hidden="true">→</span></a></li></ul></nav>
+    <nav aria-label="Χρήσιμοι σύνδεσμοι"><h3>Η CoolingEnergy</h3><ul>{pages.map(([path,label])=><li><a href={withBase(path)}>{label}</a></li>)}</ul></nav>
+    <div class="footer-contact"><h3>Επικοινωνία</h3><address>{businessInfo.phone && <a href={'tel:'+businessInfo.phone}><span class="contact-label">Τηλέφωνο</span>{businessInfo.phoneFormatted || businessInfo.phone}</a>}{businessInfo.email && <a href={'mailto:'+businessInfo.email}><span class="contact-label">Email</span>{businessInfo.email}</a>}{businessInfo.address && <p><span class="contact-label">Διεύθυνση</span>{businessInfo.address}</p>}{businessInfo.viberUrl && <a href={businessInfo.viberUrl}>Επικοινωνία στο Viber ↗</a>}</address>{!businessInfo.phone && !businessInfo.email && <div class="sample-contact"><p class="sample-note">Ενδεικτικά στοιχεία επικοινωνίας</p><p><span class="contact-label">Τηλέφωνο</span>+30 69X XXX XXXX</p><p><span class="contact-label">Email</span>info@example.com</p></div>}<p><span class="contact-label">{businessInfo.workingHours ? "Ωράριο" : "Ενδεικτικό ωράριο"}</span>{businessInfo.workingHours || "Δευτέρα–Παρασκευή · 09:00–17:00"}</p><div class="footer-coverage"><span class="contact-label">Περιοχές επίσκεψης</span><a href={withBase('perioxes/')}>Βόλος & Πήλιο ↗</a><p>Η επίσκεψη και η κάλυψη της περιοχής σας επιβεβαιώνονται κατόπιν συνεννόησης.</p></div></div>
   </div>
-
-  <!-- Persistent Mobile Sticky Call & Viber Bar (Visible only on small screens) -->
-  <div class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 p-3 md:hidden flex items-center justify-between gap-3 shadow-2xl">
-    
-    <!-- Phone Call Button -->
-    <a
-      href={`tel:${businessInfo.phone}`}
-      class="flex-1 py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 active:scale-95 transition-all"
-      aria-label="Άμεση τηλεφωνική κλήση"
-    >
-      <svg class="w-5 h-5 animate-pulse" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-      </svg>
-      <span>Τηλέφωνο</span>
-    </a>
-
-    <!-- Viber Button -->
-    <a
-      href={viberUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="flex-1 py-3 px-4 rounded-xl bg-[#7360f2] hover:bg-[#6251db] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-purple-950/30 active:scale-95 transition-all"
-      aria-label="Αποστολή μηνύματος στο Viber"
-    >
-      <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M19.38 4.62A10.74 10.74 0 0 0 12 1.5C6.2 1.5 1.5 6.2 1.5 12c0 2.22.68 4.28 1.84 5.98L2 22l4.18-1.32A10.45 10.45 0 0 0 12 22.5c5.8 0 10.5-4.7 10.5-10.5 0-2.87-1.12-5.57-3.12-7.38zm-1.88 12.3c-.3.84-1.74 1.6-2.42 1.66-.62.06-1.42.28-4.72-1.08-3.92-1.62-6.42-5.58-6.62-5.84-.2-.26-1.6-2.12-1.6-4.04 0-1.92 1.02-2.86 1.38-3.24.36-.38.78-.48 1.04-.48.26 0 .52.02.74.02.24 0 .56-.08.88.68.32.76 1.08 2.64 1.18 2.84.1.2.16.44.02.72-.14.28-.22.44-.44.7-.22.26-.46.58-.66.78-.22.22-.44.46-.18.9.26.44 1.16 1.92 2.5 3.12 1.72 1.54 3.18 2.02 3.62 2.24.44.22.7.18.96-.12.26-.3.12-.86 1.42-1.5.3-.14.62-.06.88.06.26.12 1.66.78 1.94.92.28.14.48.22.54.34.08.14.08.82-.22 1.66z"/>
-      </svg>
-      <span>Viber</span>
-    </a>
-
-  </div>
+  <div class="footer-privacy"><a href={withBase('privacy/')}>Απόρρητο & cookies</a><button type="button" data-cookie-settings hidden>Ρυθμίσεις cookies</button></div>
+  <div class="footer-bottom"><p>© {new Date().getFullYear()} {businessInfo.name}. Με επιφύλαξη παντός δικαιώματος.</p><a href="#main">Επιστροφή στην κορυφή <span aria-hidden="true">↑</span></a></div>
+</div>
 </footer>
+<nav class="mobile-bar" aria-label="Γρήγορη πρόσβαση"><a href={withBase('#services')}>Υπηρεσίες</a><a href={businessInfo.phone ? 'tel:'+businessInfo.phone : withBase('#contact')}>{businessInfo.phone ? 'Τηλέφωνο' : 'Επικοινωνία'}</a></nav>
+<style>
+.footer-privacy{display:flex;flex-wrap:wrap;gap:24px;padding-bottom:24px;color:#bbccdf;font-size:14px}.footer-privacy a,.footer-privacy button{text-decoration:underline}.footer-privacy button{background:none;border:0;padding:0;color:inherit;cursor:pointer}.footer-privacy button[hidden]{display:none}
+.site-footer{padding:0;background:#0b2035}.footer-intro{display:flex;justify-content:space-between;gap:40px;align-items:center;padding:52px 0;border-bottom:1px solid #304459}.footer-intro .eyebrow{color:#91c3ff;font-size:12px;margin:0 0 18px}.footer-intro h2{color:#fff;font-size:clamp(27px,3vw,38px);margin:0;line-height:1.25}.footer-intro h2 span{color:#9fb8d1}.footer-intro .button{flex-shrink:0}.footer-columns{display:grid;grid-template-columns:1.4fr .85fr 1fr 1.2fr;gap:36px;padding:46px 0}.footer-columns h3{font-size:16px;color:#fff;letter-spacing:0;margin-bottom:20px}.footer-columns p{font-size:14px;line-height:1.75;margin:0 0 18px;color:#bbccdf}.footer-columns .footer-owner{margin:12px 0 16px;color:#e7eef6}.footer-columns ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}.footer-columns a{font-size:14px;line-height:1.6}.footer-columns .footer-brand{font-size:27px}.footer-columns a:hover,.footer-bottom a:hover{color:#8ec2ff}.footer-all{color:#8ec2ff}.footer-social{margin-top:26px}.footer-social h3{margin-bottom:12px}.footer-columns .social-links{display:flex;flex-wrap:wrap;gap:8px}.social-links a,.social-samples span{display:inline-flex;gap:14px;border:1px solid #3e5770;border-radius:6px;padding:8px 12px}.footer-columns .footer-pending{color:#9fb3c9;font-size:14px}.social-samples span{font-size:14px;color:#9fb3c9}.footer-columns .sample-note{font-size:12px;color:#8fa9c4;margin-top:10px}.footer-contact address{font-style:normal}.footer-contact address>a{display:block;margin-bottom:18px;overflow-wrap:anywhere}.contact-label{display:block;color:#8fa9c4;font-size:12px;font-weight:600;margin-bottom:5px}.footer-coverage{margin-top:24px}.footer-coverage p{margin-top:10px}.footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;border-top:1px solid #304459}.footer-bottom p,.footer-bottom a{font-size:12px;margin:0}.footer-bottom a{white-space:nowrap}@media(max-width:1050px){.footer-columns{grid-template-columns:1fr 1fr;gap:36px 50px}}@media(max-width:760px){.site-footer{padding-bottom:90px}.footer-intro{flex-direction:column;align-items:start;padding:36px 0;gap:24px}.footer-columns{gap:34px 24px;padding:34px 0}.footer-identity,.footer-contact{grid-column:1/-1}.footer-columns h3{margin-bottom:16px}.footer-bottom{flex-direction:column;align-items:start;gap:16px}.footer-bottom p{line-height:1.6}}
+</style>

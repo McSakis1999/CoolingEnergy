@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mcsakis1999.github.io/CoolingEnergy/sitemap.xml

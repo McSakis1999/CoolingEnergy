@@ -1,32 +1,22 @@
 ---
-// src/pages/index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
 import Brands from '../components/Brands.astro';
+import Gallery from '../components/Gallery.astro';
+import { generalFaqs } from '../data/faqs.js';
+import { withBase } from '../utils/urls.js';
+import Hero from '../components/Hero.astro';
 import Services from '../components/Services.astro';
-import ServiceAreas from '../components/ServiceAreas.astro';
 import About from '../components/About.astro';
+import ServiceAreas from '../components/ServiceAreas.astro';
 import ContactForm from '../components/ContactForm.astro';
-import Footer from '../components/Footer.astro';
+import { serviceUrl } from '../utils/urls.js';
 import { generateHvacSchema } from '../utils/schema.js';
-
-const siteUrl = Astro.site ? Astro.site.href : 'https://hvac-volos.gr';
-const schemaData = generateHvacSchema(siteUrl);
+const problems = [['Δεν αποδίδει το κλιματιστικό;','episkevi-klimatistikon'],['Το πλυντήριο δεν στύβει;','episkevi-plyntirion'],['Ώρα για καθαρισμό A/C;','katharismos-syntirisi-klimatistikon'],['Το ψυγείο δεν ψύχει;','episkevi-psygeion'],['Ο φούρνος δεν ζεσταίνει;','episkevi-ilektrikon-kouzinon']];
 ---
-
-<BaseLayout 
-  title="CoolingEnergy - Γιώργος Μούτος | Ψύξη - Θέρμανση Βόλος & Πήλιο"
-  description="Πιστοποιημένος ψυκτικός Γιώργος Μούτος (CoolingEnergy), Νέα Ιωνία Βόλου. Εγκαταστάσεις A/C, αντλίες θερμότητας & συντήρηση σε Βόλο & Πήλιο."
->
-  <script type="application/ld+json" slot="schema" set:html={JSON.stringify(schemaData)} />
-
-  <Header />
-  <Hero />
-  <Services />
-  <Brands />
-  <ServiceAreas />
-  <About />
-  <ContactForm />
-  <Footer />
-</BaseLayout>
+<BaseLayout><script type="application/ld+json" slot="schema" set:html={JSON.stringify(generateHvacSchema())} />
+<Hero /><Brands /><Services />
+<section class="soft-section"><div class="container section"><p class="eyebrow">ΑΠΟ ΠΟΥ ΝΑ ΞΕΚΙΝΗΣΕΤΕ</p><h2>Κάτι δεν λειτουργεί σωστά;</h2><div class="problem-grid">{problems.map(([label,slug])=><a href={serviceUrl(slug)}>{label}<span aria-hidden="true">↗</span></a>)}</div></div></section>
+<section class="section container"><p class="eyebrow">Η ΔΙΑΔΙΚΑΣΙΑ</p><h2>Από την ανάγκη στην εργασία.</h2><div class="process-grid">{[['Περιγράφετε την ανάγκη','Μοντέλο, συμπτώματα και περιοχή: τα βασικά για να ξεκινήσει η συζήτηση.'],['Συζητάμε την επίσκεψη','Επιβεβαιώνονται η δυνατότητα εξυπηρέτησης, η διαθεσιμότητα και οι όροι χρέωσης.'],['Αξιολογείται η συσκευή','Η εργασία και τυχόν ανάγκη για ανταλλακτικά καθορίζονται με βάση τον έλεγχο.']].map(([title,text],i)=><div><span class="step">0{i+1}</span><h3>{title}</h3><p>{text}</p></div>)}</div></section>
+<About /><Gallery /><ServiceAreas />
+<section id="faq" class="section container faq-section"><div><p class="eyebrow">ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ · FAQ</p><h2>Πριν από το ραντεβού.</h2><a class="text-link" href={withBase("faq/")}>Όλες οι ερωτήσεις ανά συσκευή →</a></div><div>{generalFaqs.slice(0,5).map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div></section>
+<ContactForm /></BaseLayout>

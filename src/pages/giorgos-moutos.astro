@@ -1,0 +1,9 @@
+---
+import PeopleLayout from '../layouts/PeopleLayout.astro';
+import { profile } from '../data/peopleAndWork.js';
+import { withBase } from '../utils/urls.js';
+---
+<PeopleLayout title="Γιώργος Μούτος — Γνωρίστε τον άνθρωπο" description="Γνωρίστε τον Γιώργο Μούτο, τον άνθρωπο πίσω από την CoolingEnergy στον Βόλο και το Πήλιο." eyebrow="Ο ΑΝΘΡΩΠΟΣ ΠΙΣΩ ΑΠΟ ΤΗΝ COOLINGENERGY" heading="Γιώργος Μούτος" intro="Τεχνική φροντίδα για τις συσκευές του σπιτιού σας, στον Βόλο και το Πήλιο.">
+<div class="profile-grid"><figure class="profile-photo">{profile.photo ? <img src={withBase(profile.photo)} alt="Γιώργος Μούτος" width="720" height="900" /> : <div class="photo-placeholder"><span aria-hidden="true">＋</span><p>Η φωτογραφία του Γιώργου θα προστεθεί σύντομα</p></div>}</figure><article><p class="eyebrow">ΛΙΓΑ ΛΟΓΙΑ ΓΙΑ ΕΜΕΝΑ</p><h2>Η ιστορία μου.</h2>{profile.biography.length ? profile.biography.map(paragraph=><p>{paragraph}</p>) : <><p class="large-copy">Ο Γιώργος Μούτος είναι ο άνθρωπος πίσω από την CoolingEnergy.</p><p>Αναλαμβάνει εργασίες σε κλιματιστικά, ψυγεία, πλυντήρια ρούχων και ηλεκτρικές κουζίνες στον Βόλο και το Πήλιο.</p><p class="notice">Η προσωπική του ιστορία και περισσότερα στοιχεία για την επαγγελματική του διαδρομή θα προστεθούν σύντομα.</p></>}<a class="button" href={withBase('#contact')}>Επικοινωνία με την CoolingEnergy ↗</a></article></div>
+</PeopleLayout>
+<style>.profile-grid{display:grid;grid-template-columns:minmax(0, .85fr) minmax(0,1.15fr);gap:64px;align-items:start}.profile-photo{margin:0;overflow:hidden;border-radius:14px}.profile-photo img{width:100%;height:auto;display:block}.profile-photo .photo-placeholder{aspect-ratio:4/5}.profile-grid .button{margin-top:18px}@media(max-width:760px){.profile-grid{grid-template-columns:1fr;gap:32px}.profile-photo .photo-placeholder{aspect-ratio:4/3}}</style>

@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { generateHvacSchema } from '../utils/schema.js';
+import { areaGroups } from '../data/areas.js';
+import { servicesData } from '../data/services.js';
+import { withBase, serviceUrl } from '../utils/urls.js';
+---
+<BaseLayout title="Ψυκτικός & Τεχνικός Συσκευών στα χωριά του Πηλίου | CoolingEnergy" description="Περιοχές επίσκεψης για επισκευή ψυγείων, πλυντηρίων, κουζινών και κλιματιστικών στον Βόλο και τα χωριά του Πηλίου. Δείτε τους οικισμούς ανά περιοχή.">
+<script type="application/ld+json" slot="schema" set:html={JSON.stringify(generateHvacSchema())} /><section class="service-hero"><div class="container"><nav class="breadcrumbs" aria-label="Διαδρομή"><a href={withBase()}>Αρχική</a><span>/</span><span>Περιοχές</span></nav><p class="eyebrow">ΒΟΛΟΣ & ΠΗΛΙΟ</p><h1>Ψυκτικός και τεχνικός συσκευών στο Πήλιο.</h1><p class="hero-copy">Κλιματιστικά, ψυγεία, πλυντήρια ρούχων και ηλεκτρικές κουζίνες από την CoolingEnergy του Γιώργου Μούτου. Πείτε μας σε ποιο χωριό ή οικισμό βρίσκεστε για να συζητήσουμε την επίσκεψη.</p><p>Η κάλυψη της ακριβούς διεύθυνσης, η διαθεσιμότητα και τυχόν κόστος μετακίνησης επιβεβαιώνονται πριν από το ραντεβού.</p><nav class="topic-links" aria-label="Περιοχές Πηλίου">{areaGroups.map(g=><a href={'#'+g.id}>{g.title}</a>)}</nav></div></section>
+<div class="container section">
+<div class="area-directory">{areaGroups.map(group=><section id={group.id}><h2>{group.title}</h2><ul class="place-list">{group.places.map(place=><li>{place}</li>)}</ul><p>{group.note}</p></section>)}</div>
+<p>Δεν βλέπετε τον οικισμό σας; Αναφέρετε το ακριβές σημείο κατά την επικοινωνία για να επιβεβαιωθεί η δυνατότητα επίσκεψης.</p><h2>Υπηρεσίες για τη συσκευή σας</h2><div class="problem-grid">{servicesData.filter(s=>s.slug.startsWith('episkevi')).map(s=><a href={serviceUrl(s.slug)}>{s.title}<span aria-hidden="true">↗</span></a>)}</div><div class="actions"><a class="button" href={withBase('#contact')}>Συζητήστε μια επίσκεψη ↗</a><a class="text-link" href={withBase('faq/')}>Συχνές ερωτήσεις</a></div></div>
+</BaseLayout>

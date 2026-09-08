@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/urls.js';
+const { title, description, eyebrow, heading, intro } = Astro.props;
+const pages = [['giorgos-moutos/','Γιώργος Μούτος'],['omada/','Η ομάδα'],['erga/','Από τη δουλειά μας']];
+---
+<BaseLayout title={title+' | CoolingEnergy'} description={description}>
+<section class="service-hero"><div class="container"><nav class="breadcrumbs" aria-label="Διαδρομή"><a href={withBase()}>Αρχική</a><span>/</span><a href={withBase('#gallery')}>Άνθρωποι & εργασίες</a></nav><p class="eyebrow">{eyebrow}</p><h1>{heading}</h1><p class="hero-copy">{intro}</p></div></section>
+<div class="container section"><slot /><nav class="topic-links people-nav" aria-label="Άνθρωποι και εργασίες">{pages.map(([path,label])=><a href={withBase(path)} aria-current={Astro.url.pathname.replace(/\/$/,'')===withBase(path).replace(/\/$/,'')?'page':undefined}>{label} <span aria-hidden="true">↗</span></a>)}</nav></div>
+</BaseLayout>
+<style>.people-nav{margin-top:56px;padding-top:28px;border-top:1px solid #dce5ef}.people-nav [aria-current="page"]{background:#1460dc;color:white;border-color:#1460dc}</style>

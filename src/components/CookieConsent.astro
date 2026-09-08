@@ -1,0 +1,14 @@
+---
+import { withBase } from '../utils/urls.js';
+---
+<section id="cookie-consent" class="consent" aria-labelledby="consent-title" hidden tabindex="-1">
+  <h2 id="consent-title">Η επιλογή σας για τα cookies</h2>
+  <p>Με την αποδοχή σας, χρησιμοποιούμε το Google Analytics για στατιστικά επισκεψιμότητας. Προαιρετικά cookies και δεδομένα χρήσης αποστέλλονται στην Google μόνο αν συμφωνήσετε. Η απόρριψη δεν επηρεάζει τη χρήση του ιστοτόπου.</p>
+  <p>Η επιλογή αποθηκεύεται στη συσκευή σας για 6 μήνες. Μπορείτε να την αλλάξετε οποτεδήποτε από τις «Ρυθμίσεις cookies» στο υποσέλιδο. <a href={withBase('privacy/')}>Απόρρητο & cookies</a></p>
+  <p id="consent-status" aria-live="polite"></p>
+  <div class="consent-actions"><button type="button" data-consent="denied">Απόρριψη στατιστικών</button><button type="button" data-consent="granted">Αποδοχή στατιστικών</button><button type="button" id="consent-close" hidden>Κλείσιμο χωρίς αλλαγή</button></div>
+</section>
+<script src="../scripts/consent.js"></script>
+<style>
+  .consent[hidden],button[hidden]{display:none}.consent{position:fixed;z-index:1000;bottom:20px;left:20px;right:20px;max-width:740px;max-height:calc(100dvh - 40px);overflow:auto;padding:24px;border:1px solid #adc3d9;border-radius:12px;background:#fff;color:#152b46;box-shadow:0 8px 40px #10294140}.consent h2{font-size:21px;margin:0 0 10px}.consent p{font-size:14px;line-height:1.6;margin:8px 0}.consent a{text-decoration:underline;color:#1455b5}.consent-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.consent button{cursor:pointer;flex:1;padding:12px 16px;border:1px solid #1460dc;background:#fff;color:#124faa;border-radius:6px;font-weight:600}.consent button:hover{background:#edf4ff}@media(max-width:760px){.consent{bottom:76px;left:12px;right:12px;padding:18px;max-height:calc(100dvh - 96px)}.consent-actions{flex-direction:column}}
+</style>

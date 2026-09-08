@@ -1,0 +1,11 @@
+---
+import PeopleLayout from '../layouts/PeopleLayout.astro';
+import { teamMembers } from '../data/peopleAndWork.js';
+import { withBase } from '../utils/urls.js';
+---
+<PeopleLayout title="Η ομάδα της CoolingEnergy" description="Η ομάδα της CoolingEnergy και η διαδικασία εξυπηρέτησης για οικιακές συσκευές στον Βόλο και το Πήλιο." eyebrow="ΟΙ ΑΝΘΡΩΠΟΙ ΤΗΣ ΚΑΘΗΜΕΡΙΝΗΣ ΔΟΥΛΕΙΑΣ" heading="Η ομάδα μας." intro="Γνωρίστε τους ανθρώπους της CoolingEnergy και τον τρόπο που οργανώνεται μια επίσκεψη.">
+<div class="section-heading"><div><h2>Πίσω από κάθε επίσκεψη.</h2></div><p>Η επικοινωνία ξεκινά με τη συσκευή, το πρόβλημα και την περιοχή σας. Το αντικείμενο της εργασίας καθορίζεται με βάση τις ανάγκες του χώρου και τον έλεγχο.</p></div>
+{teamMembers.length ? <div class="gallery-grid">{teamMembers.map(member=><figure>{member.photo ? <img src={withBase(member.photo)} alt={member.name} width="720" height="540" loading="lazy" /> : <div class="photo-placeholder"><p>Η φωτογραφία θα προστεθεί σύντομα</p></div>}<figcaption><h3>{member.name}</h3><p class="eyebrow">{member.role}</p><p>{member.description}</p></figcaption></figure>)}</div> : <div class="team-pending"><div class="photo-placeholder"><span aria-hidden="true">＋</span><p>Η φωτογραφία της ομάδας θα προστεθεί σύντομα</p></div><div><h3>Γνωριμία με την ομάδα</h3><p>Σύντομα θα βρείτε εδώ φωτογραφίες και μια σύντομη παρουσίαση των μελών της ομάδας, με τον ρόλο και το αντικείμενο του καθενός.</p></div></div>}
+<div class="process-grid">{[['Πριν από την επίσκεψη','Συζητούνται τα συμπτώματα, το μοντέλο και η πρόσβαση στη συσκευή.'],['Οργάνωση του ραντεβού','Επιβεβαιώνονται η περιοχή, η διαθεσιμότητα και οι όροι χρέωσης.'],['Έλεγχος και επόμενα βήματα','Μετά τη διάγνωση συζητούνται η εργασία και τυχόν ανάγκη για ανταλλακτικά.']].map(([title,text],i)=><div><span class="step">0{i+1}</span><h3>{title}</h3><p>{text}</p></div>)}</div>
+</PeopleLayout>
+<style>.team-pending{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;background:#f2f6fa;border-radius:12px;overflow:hidden}.team-pending>div:last-child{padding:28px}@media(max-width:760px){.team-pending{grid-template-columns:1fr;gap:0}}</style>

@@ -1,0 +1,10 @@
+---
+import { galleryPhotos } from '../data/gallery.js';
+import { withBase } from '../utils/urls.js';
+---
+<section id="gallery" class="soft-section"><div class="section container">
+<div class="section-heading"><div><p class="eyebrow">ΑΝΘΡΩΠΟΙ & ΕΡΓΑΣΙΕΣ</p><h2>Η CoolingEnergy από κοντά.</h2></div><p>Ο Γιώργος, η ομάδα και εικόνες από τη δουλειά μας.</p></div>
+<div class="gallery-grid">{galleryPhotos.map(photo=><a class="gallery-card-link" href={withBase(photo.href)}><figure>{photo.src ? <img src={withBase(photo.src)} alt={photo.alt} width="720" height="540" loading="lazy" /> : <div class="photo-placeholder"><span aria-hidden="true">＋</span><p>Η φωτογραφία θα προστεθεί σύντομα</p></div>}<figcaption><h3>{photo.title}</h3><p>{photo.caption}</p><span class="card-link">Δείτε περισσότερα <span aria-hidden="true">→</span></span></figcaption></figure></a>)}</div>
+</div></section>
+
+<style>.gallery-card-link{display:block;border-radius:12px}.gallery-card-link figure{height:100%;transition:border-color .15s}.gallery-card-link:hover figure{border-color:var(--blue)}.gallery-card-link:focus-visible{outline:3px solid var(--blue);outline-offset:5px}</style>
