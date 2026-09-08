@@ -1,0 +1,36 @@
+<div class="share-page" hidden>
+  <span>Μοιραστείτε τη σελίδα</span>
+  <button type="button" data-share hidden>Κοινοποίηση <span aria-hidden="true">↗</span></button>
+  <button type="button" data-copy-link>Αντιγραφή συνδέσμου</button>
+  <p class="share-status" role="status" aria-live="polite"></p>
+  <input class="share-fallback" type="text" readonly aria-label="Σύνδεσμος σελίδας για αντιγραφή" hidden />
+</div>
+<script>
+  const panel = document.querySelector<HTMLElement>('.share-page');
+  if (panel) {
+    const share = panel.querySelector<HTMLButtonElement>('[data-share]')!;
+    const copy = panel.querySelector<HTMLButtonElement>('[data-copy-link]')!;
+    const status = panel.querySelector<HTMLElement>('.share-status')!;
+    const fallback = panel.querySelector<HTMLInputElement>('.share-fallback')!;
+    // Use the canonical public URL, without analytics parameters or private fragments.
+    const url = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')!.href;
+    panel.hidden = false;
+    share.hidden = typeof navigator.share !== 'function';
+    async function copyLink() {
+      try {
+        await navigator.clipboard.writeText(url);
+        fallback.hidden = true;
+        status.textContent = 'Ο σύνδεσμος αντιγράφηκε.';
+      } catch {
+        fallback.value = url; fallback.hidden = false; fallback.focus(); fallback.select();
+        status.textContent = 'Επιλέξτε και αντιγράψτε τον σύνδεσμο παρακάτω.';
+      }
+    }
+    copy.addEventListener('click', copyLink);
+    share.addEventListener('click', async () => {
+      try { await navigator.share({ title: document.title, url }); }
+      catch (error) { if (!(error instanceof Error && error.name === 'AbortError')) await copyLink(); }
+    });
+  }
+</script>
+<style>.share-page[hidden],.share-page [hidden]{display:none}.share-page{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:0 0 28px;padding-top:24px;border-top:1px solid #304459;font-size:13px;color:#bbccdf}.share-page>span{margin-right:8px}.share-page button{padding:10px 14px;border:1px solid #47627c;border-radius:6px;background:transparent;color:#e0edfa;cursor:pointer}.share-page button:hover{background:#173650}.share-page .share-status{margin:0;color:#a6cdff;font-size:12px}.share-fallback{width:100%;padding:10px;background:#fff;color:#152b46;border:1px solid #adc3d9;border-radius:5px}</style>

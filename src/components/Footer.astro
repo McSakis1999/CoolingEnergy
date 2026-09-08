@@ -1,5 +1,6 @@
 ---
 import { businessInfo } from '../data/businessInfo.js';
+import SharePage from './SharePage.astro';
 import { withBase, serviceUrl } from '../utils/urls.js';
 const services = [['episkevi-klimatistikon','Κλιματιστικά'],['episkevi-psygeion','Ψυγεία'],['episkevi-plyntirion','Πλυντήρια ρούχων'],['episkevi-ilektrikon-kouzinon','Κουζίνες & φούρνοι']];
 const pages = [['giorgos-moutos/','Γιώργος Μούτος'],['omada/','Η ομάδα'],['erga/','Από τη δουλειά μας'],['faq/','Συχνές ερωτήσεις'],['perioxes/','Περιοχές εξυπηρέτησης']];
@@ -14,6 +15,7 @@ const socials = (businessInfo.socialLinks || []).filter(link => /^https:\/\//i.t
     <nav aria-label="Χρήσιμοι σύνδεσμοι"><h3>Η CoolingEnergy</h3><ul>{pages.map(([path,label])=><li><a href={withBase(path)}>{label}</a></li>)}</ul></nav>
     <div class="footer-contact"><h3>Επικοινωνία</h3><address>{businessInfo.phone && <a href={'tel:'+businessInfo.phone}><span class="contact-label">Τηλέφωνο</span>{businessInfo.phoneFormatted || businessInfo.phone}</a>}{businessInfo.email && <a href={'mailto:'+businessInfo.email}><span class="contact-label">Email</span>{businessInfo.email}</a>}{businessInfo.address && <p><span class="contact-label">Διεύθυνση</span>{businessInfo.address}</p>}{businessInfo.viberUrl && <a href={businessInfo.viberUrl}>Επικοινωνία στο Viber ↗</a>}</address>{!businessInfo.phone && !businessInfo.email && <div class="sample-contact"><p class="sample-note">Ενδεικτικά στοιχεία επικοινωνίας</p><p><span class="contact-label">Τηλέφωνο</span>+30 69X XXX XXXX</p><p><span class="contact-label">Email</span>info@example.com</p></div>}<p><span class="contact-label">{businessInfo.workingHours ? "Ωράριο" : "Ενδεικτικό ωράριο"}</span>{businessInfo.workingHours || "Δευτέρα–Παρασκευή · 09:00–17:00"}</p><div class="footer-coverage"><span class="contact-label">Περιοχές επίσκεψης</span><a href={withBase('perioxes/')}>Βόλος & Πήλιο ↗</a><p>Η επίσκεψη και η κάλυψη της περιοχής σας επιβεβαιώνονται κατόπιν συνεννόησης.</p></div></div>
   </div>
+  <SharePage />
   <div class="footer-privacy"><a href={withBase('privacy/')}>Απόρρητο & cookies</a><button type="button" data-cookie-settings hidden>Ρυθμίσεις cookies</button></div>
   <div class="footer-bottom"><p>© {new Date().getFullYear()} {businessInfo.name}. Με επιφύλαξη παντός δικαιώματος.</p><a href="#main">Επιστροφή στην κορυφή <span aria-hidden="true">↑</span></a></div>
 </div>
