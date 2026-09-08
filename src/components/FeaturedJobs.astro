@@ -1,0 +1,15 @@
+---
+import { jobs } from '../data/jobs.js';
+import { featuredJobsFor, jobCategories } from '../utils/jobs.js';
+import { withBase } from '../utils/urls.js';
+import JobCard from './JobCard.astro';
+const { category } = Astro.props;
+const featured = featuredJobsFor(jobs, category);
+const onlyDemos = featured.length > 0 && featured.every(job => job.demo);
+---
+{featured.length > 0 && <section class="featured-jobs" aria-labelledby="featured-jobs-title"><div class="container section">
+  <div class="section-heading"><div><p class="eyebrow">{onlyDemos ? 'ΠΑΡΑΔΕΙΓΜΑΤΑ ΠΑΡΟΥΣΙΑΣΗΣ' : 'ΑΠΟ ΤΗ ΔΟΥΛΕΙΑ ΜΑΣ'} · {jobCategories[category]}</p><h2 id="featured-jobs-title">{onlyDemos ? 'Κάθε εργασία έχει την ιστορία της.' : 'Πραγματικές εργασίες.'}<br />Από τον έλεγχο στο αποτέλεσμα.</h2></div><p>{onlyDemos ? 'Δείτε πώς θα παρουσιάζονται οι ολοκληρωμένες εργασίες. Το περιεχόμενο και οι εικόνες είναι ενδεικτικά για την επίδειξη του ιστοτόπου.' : 'Δείτε ολοκληρωμένες εργασίες σε αυτή την κατηγορία συσκευών, με φωτογραφίες και την ιστορία κάθε περίπτωσης.'}</p></div>
+  <div class="featured-grid">{featured.map(job => <JobCard job={job} />)}</div>
+  <a class="text-link all-jobs" href={withBase('erga/')}>Όλες οι εργασίες μας <span aria-hidden="true">→</span></a>
+</div></section>}
+<style>.featured-jobs{background:#f2f6fa;border-block:1px solid #e1e8ef}.featured-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.all-jobs{display:inline-block;margin-top:28px}@media(max-width:1000px){.featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:760px){.featured-grid{grid-template-columns:1fr}}</style>

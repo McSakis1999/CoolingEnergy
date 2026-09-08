@@ -5,6 +5,4 @@ export const profile = {
 };
 // Add confirmed names, roles, descriptions and photo paths relative to public.
 export const teamMembers = [];
-// Each project: { title, category, location, description, work: [], images: [{ src, alt, caption }] }.
-// Use real completed jobs and photos supplied with permission.
-export const projects = [];
+// Completed jobs are maintained in jobs.json. See JOBS-GUIDE.md.

@@ -1,0 +1,25 @@
+---
+import { jobCategories } from '../utils/jobs.js';
+import { withBase } from '../utils/urls.js';
+const { job, detailed = false } = Astro.props;
+---
+<article class:list={['job-card', { detailed }]} id={detailed ? job.id : undefined}>
+  <figure class="job-cover">
+    <img src={withBase(job.mainImage.src)} alt={job.mainImage.alt} width="900" height="675" loading="lazy" decoding="async" />
+    {detailed && job.mainImage.caption && <figcaption>{job.mainImage.caption}</figcaption>}
+  </figure>
+  <div class="job-copy">
+    {job.demo && <p class="demo-label">ΔΕΙΓΜΑ ΠΑΡΟΥΣΙΑΣΗΣ · ΟΧΙ ΠΡΑΓΜΑΤΙΚΟ ΕΡΓΟ</p>}
+    <p class="job-category">{jobCategories[job.category]}{job.location && ` · ${job.location}`}</p>
+    {detailed ? <h2>{job.title}</h2> : <h3>{job.title}</h3>}
+    <p>{job.description}</p>
+    {detailed ? <>
+      {job.work?.length > 0 && <ul class="check-list">{job.work.map(item => <li>{item}</li>)}</ul>}
+      {job.images.length > 0 && <details class="job-photos"><summary>Περισσότερες φωτογραφίες ({job.images.length})</summary><div class="job-photo-grid">{job.images.map(photo => <figure><a href={withBase(photo.src)} target="_blank" rel="noopener noreferrer" aria-label={`${photo.alt} — άνοιγμα πλήρους εικόνας σε νέα καρτέλα`}><img src={withBase(photo.src)} alt={photo.alt} width="900" height="675" loading="lazy" decoding="async" /></a>{photo.caption && <figcaption>{photo.caption}</figcaption>}</figure>)}</div></details>}
+    </> : <a class="text-link job-link" href={withBase(`erga/#${job.id}`)}>Δείτε την εργασία <span aria-hidden="true">↗</span></a>}
+  </div>
+</article>
+<style>
+  .job-copy>.demo-label{align-self:start;padding:7px 10px;border:1px solid #e4cc92;border-radius:5px;background:#fff7e6;color:#775517;font-size:10px;font-weight:700;line-height:1.5;letter-spacing:.03em}
+  .job-card{overflow:hidden;min-width:0;border:1px solid #dce5ef;border-radius:14px;background:#fff;display:flex;flex-direction:column;scroll-margin-top:110px}.job-cover{margin:0}.job-cover img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;height:auto}.job-copy{padding:26px;display:flex;flex-direction:column;flex:1}.job-category{font-size:11px;font-weight:700;color:#1460dc;margin-bottom:14px}.job-card h3{font-size:23px;line-height:1.25}.job-copy>p:not(.job-category){font-size:15px}.job-link{margin-top:auto;padding-top:8px;display:flex;justify-content:space-between;gap:16px}.detailed{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}.detailed h2{font-size:28px}.detailed .job-cover{padding:20px 0 20px 20px}.detailed .job-cover img{border-radius:9px;object-fit:contain;background:#f2f6fa}.job-photos{margin-top:6px}.job-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-bottom:20px}.job-photo-grid figure{margin:0;min-width:0}.job-photo-grid img{width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:#f2f6fa;border-radius:6px}figcaption{padding:10px 0;color:#526579;font-size:12px;line-height:1.6}.job-cover figcaption{padding-inline:4px}@media(max-width:760px){.detailed{grid-template-columns:1fr}.detailed .job-cover{padding:16px 16px 0}.job-copy{padding:22px}.job-card{scroll-margin-top:90px}}@media(prefers-reduced-motion:no-preference) and (hover:hover){.job-card{transition:border-color .2s,box-shadow .2s}.job-card:hover{border-color:#a6c5e7;box-shadow:0 8px 28px #173c650a}}
+</style>
