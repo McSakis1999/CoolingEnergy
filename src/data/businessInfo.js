@@ -10,6 +10,11 @@ export const businessInfo = {
   viberUrl: 'viber://chat?number=%2B306980805220',
   address: '',
   workingHours: 'Δευτέρα–Σάββατο · 09:00–18:00',
+  contactHours: {
+    days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    opens: '09:00',
+    closes: '18:00',
+  },
   serviceAreas: ['Βόλος', 'Πήλιο'],
   socialLinks: [{ label: 'Instagram', url: 'https://www.instagram.com/giorgos_moutos/' }],
 };
