@@ -112,8 +112,9 @@ section[id] {
 .site-header {
   position:sticky;
   top:0;
-  background:#fffffffa;
-  border-bottom:1px solid #e5eaf0;
+  background:var(--navy);
+  color:#fff;
+  border-bottom:1px solid #28435d;
   z-index:50
 }
 .header-inner {
@@ -138,11 +139,11 @@ section[id] {
   display:block;
   font-size:9px;
   letter-spacing:2px;
-  color:#627184;
+  color:#b6c7d8;
   margin-top:5px
 }
 .brand-blue {
-  color:var(--blue)
+  color:#77b7ff
 }
 .desktop-nav {
   display:flex;
@@ -151,7 +152,7 @@ section[id] {
   font-weight:600
 }
 .desktop-nav a:hover {
-  color:var(--blue)
+  color:#77b7ff
 }
 .mobile-menu {
   display:none
@@ -587,7 +588,7 @@ details p {
   letter-spacing:-1px
 }
 .footer-brand span {
-  color:#79b4f5
+  color:#77b7ff
 }
 .site-footer p {
   color:#b5c6d9;
@@ -745,6 +746,7 @@ details p {
   right:0;
   top:75px;
   background:white;
+  color:var(--navy);
   padding:15px 22px 22px;
   box-shadow:0 15px 20px #17375415;
   display:grid;

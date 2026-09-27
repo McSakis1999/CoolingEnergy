@@ -1,5 +1,18 @@
 // Only owner-confirmed contact details belong here.
-export const businessInfo = { name: 'CoolingEnergy', ownerName: 'Γιώργος Μούτος', tagline: 'Κλιματιστικά, ψυγεία, πλυντήρια & ηλεκτρικές κουζίνες στον Βόλο και το Πήλιο', phone: '', phoneFormatted: '', email: '', viberUrl: '', address: '', workingHours: '', serviceAreas: ['Βόλος', 'Πήλιο'], socialLinks: [] };
+export const businessInfo = {
+  name: 'CoolingEnergy',
+  ownerName: 'ΜΟΥΤΟΣ ΓΕΩΡΓΙΟΣ',
+  taxId: '171101886',
+  tagline: 'Κλιματιστικά, ψυγεία, πλυντήρια & ηλεκτρικές κουζίνες στον Βόλο και το Πήλιο',
+  phone: '+306980805220',
+  phoneFormatted: '+30 698 080 5220',
+  email: 'info@coolingenergy.gr',
+  viberUrl: 'viber://chat?number=%2B306980805220',
+  address: '',
+  workingHours: 'Δευτέρα–Σάββατο · 09:00–18:00',
+  serviceAreas: ['Βόλος', 'Πήλιο'],
+  socialLinks: [{ label: 'Instagram', url: 'https://www.instagram.com/giorgos_moutos/' }],
+};
 
 // socialLinks example: { label: 'Instagram', url: 'https://www.instagram.com/CONFIRMED_HANDLE/' }. Add only verified profiles.
 

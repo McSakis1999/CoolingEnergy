@@ -15,11 +15,12 @@ const groups = [{ id:'ac', title:'Κλιματιστικά', text:'Για την
 ---
 <section id="services" class="section container">
 <div class="section-heading"><div><p class="eyebrow">ΟΙ ΥΠΗΡΕΣΙΕΣ ΜΑΣ</p><h2>Η φροντίδα που χρειάζονται<br />οι συσκευές σας.</h2></div><p>Επιλέξτε τη συσκευή και την εργασία που σας ενδιαφέρει. Δείτε τι χρειάζεται να γνωρίζετε πριν από την επίσκεψη.</p></div>
-{groups.map(group => <div class="service-group"><div class="group-heading"><span class="group-icon" aria-hidden="true">{group.symbol}</span><div><h3>{group.title}</h3><p>{group.text}</p></div></div><div class="service-grid">{servicesData.filter(s=>s.group===group.id).map((s,i)=><a class="service-card" href={serviceUrl(s.slug)}><div class="service-card-image"><img src={withBase(`images/services/${serviceImages[s.slug]}.webp`)} alt="" width="768" height="512" loading="lazy" decoding="async" /></div><div class="service-card-body"><div class="card-top"><span>0{i+1}</span><span aria-hidden="true">↗</span></div><h4>{s.title}</h4><p>{s.description}</p><span class="card-link">Δείτε την υπηρεσία <span aria-hidden="true">→</span></span></div></a>)}</div></div>)}
+{groups.map(group => <div class="service-group"><div class="group-heading"><span class="group-icon" aria-hidden="true">{group.symbol}</span><div><h3>{group.title}</h3><p>{group.text}</p></div></div><div class="service-grid">{servicesData.filter(s=>s.group===group.id).map(s=><a class="service-card" href={serviceUrl(s.slug)}><div class="service-card-image"><img src={withBase(`images/services/${serviceImages[s.slug]}.webp`)} alt="" width="768" height="512" loading="lazy" decoding="async" /></div><div class="service-card-body"><div class="card-top"><span aria-hidden="true">↗</span></div><h4>{s.title}</h4><p>{s.description}</p><span class="card-link">Δείτε την υπηρεσία <span aria-hidden="true">→</span></span></div></a>)}</div></div>)}
 </section>
 
 <style>
 .service-card{padding:0;overflow:hidden}
+.card-top{justify-content:flex-end}
 .service-card-image{aspect-ratio:3/2;background:#edf4fb;overflow:hidden}
 .service-card-image img{display:block;width:100%;height:100%;object-fit:cover}
 .service-card-body{padding:25px;display:flex;flex:1;flex-direction:column}
