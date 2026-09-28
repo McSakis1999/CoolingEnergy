@@ -22,7 +22,10 @@ export function generateHvacSchema() {
    url: absoluteUrl(),
    logo: absoluteUrl('images/logo.png'),
    description: businessInfo.tagline,
-   sameAs: businessInfo.socialLinks.filter(link => /^https:\/\//i.test(link.url)).map(link => link.url),
+   sameAs: [
+     businessInfo.googleBusinessProfileUrl,
+     ...businessInfo.socialLinks.map(link => link.url),
+   ].filter(url => /^https:\/\//i.test(url || '')),
    areaServed: places.map(name => ({ '@type': 'Place', name: `${name}, Μαγνησία, Ελλάδα` })),
    ...contact,
    contactPoint: {

@@ -16,7 +16,10 @@ const socialAlt = `CoolingEnergy — ${card.title || card.lines.join(' ')} — �
 <head>
 <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{title}</title><meta name="description" content={description} />
-<link rel="canonical" href={canonical} /><link rel="icon" href={withBase('images/logo.png')} />
+<link rel="canonical" href={canonical} />
+<link rel="icon" type="image/x-icon" href={withBase('favicon.ico')} />
+<link rel="icon" type="image/png" sizes="192x192" href={withBase('favicon.png')} />
+<link rel="apple-touch-icon" sizes="180x180" href={withBase('apple-touch-icon.png')} />
 <meta property="og:type" content="website" /><meta property="og:locale" content="el_GR" />
 <meta property="og:title" content={title} /><meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} /><meta property="og:image" content={socialImage} />

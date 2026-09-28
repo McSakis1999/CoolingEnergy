@@ -8,6 +8,7 @@ export const businessInfo = {
   phoneFormatted: '+30 698 080 5220',
   email: 'info@coolingenergy.gr',
   viberUrl: 'viber://chat?number=%2B306980805220',
+  googleBusinessProfileUrl: 'https://share.google/XN8noqp2fYGaFPYCP',
   address: '',
   workingHours: 'Δευτέρα–Σάββατο · 09:00–18:00',
   contactHours: {
