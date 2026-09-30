@@ -104,11 +104,12 @@ const phoneIcon = "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 24px;
+    font-size: 24px; .desktop-nav a
     font-weight: 800;
     letter-spacing: -1px;
     color: #fff;
-    text-decoration: none;
+    text-decoration: none; 
+    flex: none;
   }
 
   .brand img {
@@ -146,6 +147,7 @@ const phoneIcon = "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5
     color: #fff;
     text-decoration: none;
     transition: color 0.25s ease, transform 0.25s ease;
+    white-space: nowrap;
   }
 
   .desktop-nav a::after {
@@ -193,7 +195,8 @@ const phoneIcon = "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5
     box-shadow:
       0 10px 24px color-mix(in srgb, var(--hd-blue) 40%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease; 
+    flex: none;
   }
 
   .header-action:hover {
@@ -250,18 +253,28 @@ const phoneIcon = "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5
     display: flex;
     align-items: center;
     gap: 0.6rem;
+    flex: none;
   }
 
-  .mobile-menu {
-    display: block; /* overrides the old display:none */
+   .mobile-menu {
+    display: block;
+    position: static; /* keeps the dropdown anchored to the sticky header */
+    flex: none;
+    border-bottom: none;
   }
 
-  .mobile-call,
+ .mobile-call,
   .mobile-menu summary {
-    display: grid;
-    place-items: center;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
     width: 44px;
     height: 44px;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
     border-radius: 14px;
     cursor: pointer;
     list-style: none;
@@ -299,6 +312,8 @@ const phoneIcon = "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5
   .burger {
     position: relative;
     display: block;
+    flex: none;
+    margin: 0;
     width: 20px;
     height: 14px;
   }
@@ -390,10 +405,15 @@ const phoneIcon = "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5
   }
 
   /* ---------- Breakpoint ---------- */
-  @media (min-width: 900px) {
+  @media (min-width: 1024px) {
     .desktop-nav { display: flex; }
     .header-action { display: inline-flex; }
     .mobile-actions { display: none; }
+  }
+
+   @media (min-width: 1024px) and (max-width: 1180px) {
+    .header-inner { gap: 14px; }
+    .desktop-nav { gap: 18px; }
   }
 
   /* ---------- Animations ---------- */
