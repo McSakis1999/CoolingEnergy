@@ -51,7 +51,7 @@ Matching is by appliance category, not the particular service. A washer installa
 
 ## Display controls
 
-The initial catalog includes four demonstration entries using existing service illustrations. `demo: true` shows a clear demonstration label on both the service cards and full gallery. Replace sample text and images with a real job before removing this flag or setting it to `false`. To hide the samples, set `published: false` or remove their entries.
+The live catalog starts empty. Add only real completed jobs. Until entries are published, service-page work sections are omitted and the full gallery displays a short introductory message.
 
 - `published: false`: hidden everywhere; useful while preparing an entry.
 - `published: true`: visible in the full jobs gallery.

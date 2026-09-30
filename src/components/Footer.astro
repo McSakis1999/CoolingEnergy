@@ -8,24 +8,389 @@ const socials = (businessInfo.socialLinks || []).filter(link => /^https:\/\//i.t
 ---
 <footer class="site-footer">
 <div class="container">
-  <div class="footer-intro"><div><p class="eyebrow">COOLINGENERGY · ΒΟΛΟΣ & ΠΗΛΙΟ</p><h2>Φροντίδα για το σπίτι σας.<br /><span>Ξεκινά με μια επικοινωνία.</span></h2></div><a class="button" href={businessInfo.phone ? 'tel:'+businessInfo.phone : withBase('#contact')}>{businessInfo.phone ? 'Καλέστε μας' : 'Στοιχεία επικοινωνίας'} <span aria-hidden="true">↗</span></a></div>
+  <div class="footer-intro"><div><p class="eyebrow">COOLINGENERGY · ΒΟΛΟΣ & ΠΗΛΙΟ</p><h2>Φροντίδα για το σπίτι σας.<br /><span>Ξεκινά με μια επικοινωνία.</span></h2></div><a class="button footer-cta" href={businessInfo.phone ? 'tel:'+businessInfo.phone : withBase('#contact')}><span class="cta-text">{businessInfo.phone ? 'Καλέστε μας' : 'Στοιχεία επικοινωνίας'}</span> <span class="cta-arrow" aria-hidden="true">↗</span><span class="cta-shine" aria-hidden="true"></span></a></div>
   <div class="footer-columns">
     <div class="footer-identity"><a class="footer-brand" href={withBase()}><span>Cooling</span>Energy</a><p class="footer-owner">{businessInfo.ownerName}<br />ΑΦΜ: {businessInfo.taxId}</p><p>Κλιματιστικά, ψυγεία, πλυντήρια και ηλεκτρικές κουζίνες. Τεχνική φροντίδα στον Βόλο και τα χωριά του Πηλίου.</p><div class="footer-social"><h3>Βρείτε μας online</h3><ul class="social-links">
   {socials.map(link => <li><a class="social-button instagram" href={link.url} target="_blank" rel="noopener noreferrer" aria-label={link.label+' (ανοίγει σε νέα καρτέλα)'} title={link.label}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg></a></li>)}
   {businessInfo.viberUrl && <li><a class="social-button viber" href={businessInfo.viberUrl} aria-label="Επικοινωνία στο Viber" title="Viber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.8 3.8C16.2 1.4 7.8 1.4 4.2 3.8 1.5 5.6 1.5 15.2 4.2 17.5l2.3 1V22l3.8-3.4c3.6.3 7.2-.2 9.5-1.7 2.7-2 2.7-11.1 0-13.1Z" /><path fill="currentColor" stroke="none" d="M8.1 6.4c-.5-.5-1.1-.3-1.5.1l-.8.9c-.5.7.1 2.7 1.7 4.8s3.8 3.8 5.6 4.4c.9.3 1.5.2 1.9-.3l.9-1.2c.3-.4.3-.8-.2-1.2l-1.9-1.3c-.4-.3-.8-.2-1.1.2l-.6.7c-.3.3-.6.2-1-.1-1.2-.7-2.1-1.7-2.7-2.8-.2-.4-.3-.7 0-1l.6-.6c.3-.3.4-.7.1-1.1Z" /><path d="M12 5.5a6.5 6.5 0 0 1 6.5 6.5M12.4 8a3.7 3.7 0 0 1 3.7 3.7" /></svg></a></li>}
-</ul>{businessInfo.googleBusinessProfileUrl && <p><a href={businessInfo.googleBusinessProfileUrl} target="_blank" rel="noopener noreferrer" aria-label="CoolingEnergy στο Google (ανοίγει σε νέα καρτέλα)">Βρείτε μας στο Google ↗</a></p>}</div></div>
+</ul>{businessInfo.googleBusinessProfileUrl && <p><a class="footer-google" href={businessInfo.googleBusinessProfileUrl} target="_blank" rel="noopener noreferrer" aria-label="CoolingEnergy στο Google (ανοίγει σε νέα καρτέλα)">Βρείτε μας στο Google ↗</a></p>}</div></div>
     <nav aria-label="Υπηρεσίες στο υποσέλιδο"><h3>Υπηρεσίες</h3><ul>{services.map(([slug,label])=><li><a href={serviceUrl(slug)}>{label}</a></li>)}<li><a class="footer-all" href={withBase('#services')}>Όλες οι υπηρεσίες <span aria-hidden="true">→</span></a></li></ul></nav>
     <nav aria-label="Χρήσιμοι σύνδεσμοι"><h3>Η CoolingEnergy</h3><ul>{pages.map(([path,label])=><li><a href={withBase(path)}>{label}</a></li>)}</ul></nav>
     <div class="footer-contact"><h3>Επικοινωνία</h3><address>{businessInfo.phone && <a href={'tel:'+businessInfo.phone}><span class="contact-label">Τηλέφωνο</span>{businessInfo.phoneFormatted || businessInfo.phone}</a>}{businessInfo.email && <a href={'mailto:'+businessInfo.email}><span class="contact-label">Email</span>{businessInfo.email}</a>}{businessInfo.address && <p><span class="contact-label">Διεύθυνση</span>{businessInfo.address}</p>}</address>{businessInfo.workingHours && <p><span class="contact-label">Ωράριο</span>{businessInfo.workingHours}</p>}<div class="footer-coverage"><span class="contact-label">Περιοχές επίσκεψης</span><a href={withBase('perioxes/')}>Βόλος & Πήλιο ↗</a><p>Η επίσκεψη και η κάλυψη της περιοχής σας επιβεβαιώνονται κατόπιν συνεννόησης.</p></div></div>
   </div>
 
   <div class="footer-privacy"><a href={withBase('privacy/')}>Απόρρητο & cookies</a><button type="button" data-cookie-settings hidden>Ρυθμίσεις cookies</button></div>
-  <div class="footer-bottom"><p>© {new Date().getFullYear()} {businessInfo.name}. Με επιφύλαξη παντός δικαιώματος.</p><a href="#main">Επιστροφή στην κορυφή <span aria-hidden="true">↑</span></a></div>
+  <div class="footer-bottom"><p>© {new Date().getFullYear()} {businessInfo.name}. Με επιφύλαξη παντός δικαιώματος.</p><a class="to-top" href="#main">Επιστροφή στην κορυφή <span aria-hidden="true">↑</span></a></div>
 </div>
 </footer>
 <nav class="mobile-bar" aria-label="Γρήγορη πρόσβαση"><a href={withBase('#services')}>Υπηρεσίες</a><a href={businessInfo.phone ? 'tel:'+businessInfo.phone : withBase('#contact')}>{businessInfo.phone ? 'Τηλέφωνο' : 'Επικοινωνία'}</a></nav>
+
 <style>
-.footer-privacy{display:flex;flex-wrap:wrap;gap:24px;padding-bottom:24px;color:#bbccdf;font-size:14px}.footer-privacy a,.footer-privacy button{text-decoration:underline}.footer-privacy button{background:none;border:0;padding:0;color:inherit;cursor:pointer}.footer-privacy button[hidden]{display:none}
-.site-footer{padding:0;background:#0b2035}.footer-intro{display:flex;justify-content:space-between;gap:40px;align-items:center;padding:52px 0;border-bottom:1px solid #304459}.footer-intro .eyebrow{color:#91c3ff;font-size:12px;margin:0 0 18px}.footer-intro h2{color:#fff;font-size:clamp(27px,3vw,38px);margin:0;line-height:1.25}.footer-intro h2 span{color:#9fb8d1}.footer-intro .button{flex-shrink:0}.footer-columns{display:grid;grid-template-columns:1.4fr .85fr 1fr 1.2fr;gap:36px;padding:46px 0}.footer-columns h3{font-size:16px;color:#fff;letter-spacing:0;margin-bottom:20px}.footer-columns p{font-size:14px;line-height:1.75;margin:0 0 18px;color:#bbccdf}.footer-columns .footer-owner{margin:12px 0 16px;color:#e7eef6}.footer-columns ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}.footer-columns a{font-size:14px;line-height:1.6}.footer-columns .footer-brand,.footer-columns .footer-brand:hover{font-size:27px;color:#fff}.footer-columns a:hover,.footer-bottom a:hover{color:#8ec2ff}.footer-all{color:#8ec2ff}.footer-social{margin-top:26px}.footer-social h3{margin-bottom:12px}.footer-columns .social-links{display:flex;flex-wrap:wrap;gap:8px}.footer-contact address{font-style:normal}.footer-contact address>a{display:block;margin-bottom:18px;overflow-wrap:anywhere}.contact-label{display:block;color:#8fa9c4;font-size:12px;font-weight:600;margin-bottom:5px}.footer-coverage{margin-top:24px}.footer-coverage p{margin-top:10px}.footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;border-top:1px solid #304459}.footer-bottom p,.footer-bottom a{font-size:12px;margin:0}.footer-bottom a{white-space:nowrap}@media(max-width:1050px){.footer-columns{grid-template-columns:1fr 1fr;gap:36px 50px}}@media(max-width:760px){.site-footer{padding-bottom:90px}.footer-intro{flex-direction:column;align-items:start;padding:36px 0;gap:24px}.footer-columns{gap:34px 24px;padding:34px 0}.footer-identity,.footer-contact{grid-column:1/-1}.footer-columns h3{margin-bottom:16px}.footer-bottom{flex-direction:column;align-items:start;gap:16px}.footer-bottom p{line-height:1.6}}
-.footer-columns .social-button{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;padding:0;border:0;border-radius:50%;color:#fff;transition:transform .2s,filter .2s}.social-button svg{width:26px;height:26px}.social-button.instagram{background:radial-gradient(circle at 30% 100%,#feda75 0%,#fa7e1e 25%,#d62976 50%,#962fbf 75%,#4f5bd5 100%)}.social-button.viber{background:#7360f2}.footer-columns .social-button:hover{color:#fff;transform:translateY(-2px);filter:brightness(1.1)}.social-button:focus-visible{outline:3px solid #fff;outline-offset:4px}@media(prefers-reduced-motion:reduce){.footer-columns .social-button{transition:none}.footer-columns .social-button:hover{transform:none}}
+/* ---------- Base ---------- */
+.site-footer{
+  --ft-blue:var(--blue,#0ea5e9);
+  --ft-link:#8ec2ff;
+  --ft-line:#304459;
+  position:relative;
+  padding:0;
+  background:
+    radial-gradient(circle at 92% 0%,color-mix(in srgb,var(--ft-blue) 16%,transparent),transparent 42%),
+    radial-gradient(circle at 0% 100%,color-mix(in srgb,#22d3ee 8%,transparent),transparent 40%),
+    #0b2035;
+}
+
+/* thin gradient line along the top edge */
+.site-footer::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--ft-link),#22d3ee,transparent);
+  opacity:.55;
+  pointer-events:none;
+}
+
+/* ---------- Intro ---------- */
+.footer-intro{
+  display:flex;
+  justify-content:space-between;
+  gap:40px;
+  align-items:center;
+  padding:52px 0;
+  border-bottom:1px solid var(--ft-line);
+}
+
+.footer-intro .eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:.75rem;
+  color:#91c3ff;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.16em;
+  margin:0 0 18px;
+}
+
+.footer-intro .eyebrow::before{
+  content:"";
+  width:32px;
+  height:2px;
+  border-radius:2px;
+  background:currentColor;
+}
+
+.footer-intro h2{
+  color:#fff;
+  font-size:clamp(27px,3vw,38px);
+  letter-spacing:-.02em;
+  margin:0;
+  line-height:1.25;
+}
+
+.footer-intro h2 span{
+  background:linear-gradient(90deg,#9fc7ff,#22d3ee);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+/* CTA */
+.footer-intro .button{flex-shrink:0}
+
+.footer-cta{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  overflow:hidden;
+  padding:.95rem 1.6rem;
+  border:0;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  color:#fff;
+  background:linear-gradient(135deg,var(--ft-blue),color-mix(in srgb,var(--ft-blue) 65%,#1e3a8a));
+  box-shadow:
+    0 12px 28px color-mix(in srgb,var(--ft-blue) 40%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.25);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+
+.footer-cta:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 18px 36px color-mix(in srgb,var(--ft-blue) 55%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.3);
+}
+
+.footer-cta:active{transform:translateY(0) scale(.98)}
+
+.footer-cta:focus-visible{outline:3px solid #fff;outline-offset:4px}
+
+.cta-arrow{
+  display:grid;
+  place-items:center;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:rgba(255,255,255,.2);
+  transition:transform .3s ease,background .3s ease;
+}
+
+.footer-cta:hover .cta-arrow{
+  transform:rotate(45deg);
+  background:rgba(255,255,255,.32);
+}
+
+.cta-shine{
+  position:absolute;
+  top:0;bottom:0;
+  left:-60%;
+  width:40%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:skewX(-20deg);
+  pointer-events:none;
+}
+
+.footer-cta:hover .cta-shine{animation:ft-shine .9s ease}
+
+/* ---------- Columns ---------- */
+.footer-columns{
+  display:grid;
+  grid-template-columns:1.4fr .85fr 1fr 1.2fr;
+  gap:36px;
+  padding:46px 0;
+}
+
+.footer-columns h3{
+  position:relative;
+  font-size:16px;
+  color:#fff;
+  letter-spacing:0;
+  margin-bottom:20px;
+  padding-bottom:12px;
+}
+
+/* short blue underline under each column title */
+.footer-columns h3::after{
+  content:"";
+  position:absolute;
+  left:0;bottom:0;
+  width:26px;
+  height:2px;
+  border-radius:2px;
+  background:linear-gradient(90deg,var(--ft-link),#22d3ee);
+}
+
+.footer-columns p{font-size:14px;line-height:1.75;margin:0 0 18px;color:#bbccdf}
+.footer-columns .footer-owner{margin:12px 0 16px;color:#e7eef6}
+.footer-columns ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.footer-columns a{font-size:14px;line-height:1.6}
+
+.footer-columns .footer-brand,
+.footer-columns .footer-brand:hover{font-size:27px;color:#fff}
+
+.footer-columns .footer-brand{
+  display:inline-block;
+  transition:transform .3s ease;
+}
+.footer-columns .footer-brand:hover{transform:translateY(-2px)}
+.footer-brand span{color:var(--ft-link)}
+
+/* link lists: slide right + sweeping underline */
+.footer-columns nav ul a{
+  position:relative;
+  display:inline-block;
+  color:#bbccdf;
+  transition:color .25s ease,transform .25s ease;
+}
+
+.footer-columns nav ul a::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:-2px;
+  height:1px;
+  background:var(--ft-link);
+  transform:scaleX(0);
+  transform-origin:right;
+  transition:transform .3s ease;
+}
+
+.footer-columns nav ul a:hover,
+.footer-columns nav ul a:focus-visible{
+  color:var(--ft-link);
+  transform:translateX(4px);
+}
+
+.footer-columns nav ul a:hover::after,
+.footer-columns nav ul a:focus-visible::after{
+  transform:scaleX(1);
+  transform-origin:left;
+}
+
+.footer-all{color:var(--ft-link)!important}
+.footer-all span{display:inline-block;transition:transform .25s ease}
+.footer-all:hover span{transform:translateX(5px)}
+
+.footer-columns a:hover,
+.footer-bottom a:hover{color:var(--ft-link)}
+
+/* ---------- Social ---------- */
+.footer-social{margin-top:26px}
+.footer-social h3{margin-bottom:12px}
+.footer-columns .social-links{display:flex;flex-wrap:wrap;gap:10px}
+
+.footer-columns .social-button{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:48px;
+  height:48px;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  color:#fff;
+  box-shadow:0 8px 18px rgba(0,0,0,.3);
+  transition:transform .25s ease,filter .25s ease,box-shadow .25s ease;
+}
+
+.social-button svg{width:26px;height:26px;transition:transform .3s ease}
+.social-button.instagram{background:radial-gradient(circle at 30% 100%,#feda75 0%,#fa7e1e 25%,#d62976 50%,#962fbf 75%,#4f5bd5 100%)}
+.social-button.viber{background:#7360f2}
+
+.footer-columns .social-button:hover{
+  color:#fff;
+  transform:translateY(-4px) scale(1.05);
+  filter:brightness(1.1);
+  box-shadow:0 14px 26px rgba(0,0,0,.4);
+}
+
+.social-button:hover svg{transform:rotate(-8deg) scale(1.08)}
+.social-button:focus-visible{outline:3px solid #fff;outline-offset:4px}
+
+.footer-google{
+  display:inline-block;
+  transition:transform .25s ease,color .25s ease;
+}
+.footer-google:hover{transform:translateX(3px)}
+
+/* ---------- Contact ---------- */
+.footer-contact address{font-style:normal}
+
+.footer-contact address>a{
+  display:block;
+  margin-bottom:18px;
+  overflow-wrap:anywhere;
+  color:#e7eef6;
+  transition:color .25s ease,transform .25s ease;
+}
+
+.footer-contact address>a:hover{transform:translateX(4px)}
+
+.contact-label{
+  display:block;
+  color:#8fa9c4;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.04em;
+  margin-bottom:5px;
+}
+
+.footer-coverage{
+  margin-top:24px;
+  padding:16px 18px;
+  border-radius:16px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--ft-line);
+  border-left:3px solid var(--ft-link);
+}
+
+.footer-coverage p{margin:10px 0 0;font-size:13px}
+
+/* ---------- Privacy + bottom ---------- */
+.footer-privacy{
+  display:flex;
+  flex-wrap:wrap;
+  gap:24px;
+  padding-bottom:24px;
+  color:#bbccdf;
+  font-size:14px;
+}
+
+.footer-privacy a,
+.footer-privacy button{
+  text-decoration:underline;
+  text-decoration-color:rgba(187,204,223,.35);
+  text-underline-offset:4px;
+  transition:color .25s ease,text-decoration-color .25s ease;
+}
+
+.footer-privacy a:hover,
+.footer-privacy button:hover{color:var(--ft-link);text-decoration-color:var(--ft-link)}
+
+.footer-privacy button{background:none;border:0;padding:0;color:inherit;cursor:pointer}
+.footer-privacy button[hidden]{display:none}
+
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:24px;
+  padding:24px 0;
+  border-top:1px solid var(--ft-line);
+}
+
+.footer-bottom p,
+.footer-bottom a{font-size:12px;margin:0}
+
+.footer-bottom a{white-space:nowrap}
+
+.to-top{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.5rem .95rem;
+  border-radius:999px;
+  border:1px solid var(--ft-line);
+  transition:color .25s ease,border-color .25s ease,background .25s ease;
+}
+
+.to-top span{display:inline-block;transition:transform .25s ease}
+
+.to-top:hover{
+  border-color:color-mix(in srgb,var(--ft-link) 55%,transparent);
+  background:color-mix(in srgb,var(--ft-link) 10%,transparent);
+}
+
+.to-top:hover span{transform:translateY(-3px)}
+
+/* ---------- Animations ---------- */
+@keyframes ft-shine{to{left:130%}}
+
+/* ---------- Responsive ---------- */
+@media(max-width:1050px){
+  .footer-columns{grid-template-columns:1fr 1fr;gap:36px 50px}
+}
+
+@media(max-width:760px){
+  .site-footer{padding-bottom:90px}
+  .footer-intro{flex-direction:column;align-items:start;padding:36px 0;gap:24px}
+  .footer-columns{gap:34px 24px;padding:34px 0}
+  .footer-identity,.footer-contact{grid-column:1/-1}
+  .footer-columns h3{margin-bottom:16px}
+  .footer-bottom{flex-direction:column;align-items:start;gap:16px}
+  .footer-bottom p{line-height:1.6}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .footer-cta,.cta-arrow,.footer-brand,
+  .footer-columns nav ul a,.footer-columns nav ul a::after,
+  .footer-all span,.footer-google,.footer-contact address>a,
+  .footer-columns .social-button,.social-button svg,
+  .to-top span{transition:none}
+  .footer-cta:hover .cta-shine{animation:none}
+  .footer-cta:hover,.footer-columns .social-button:hover,
+  .footer-columns nav ul a:hover,.footer-brand:hover{transform:none}
+}
 </style>

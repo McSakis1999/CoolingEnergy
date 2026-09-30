@@ -1,0 +1,134 @@
+---
+import { serviceUrl } from '../utils/urls.js';
+
+const problems = [
+  ['Δεν αποδίδει το κλιματιστικό;', 'episkevi-klimatistikon'],
+  ['Το πλυντήριο δεν στύβει;', 'episkevi-plyntirion'],
+  ['Ώρα για καθαρισμό A/C;', 'katharismos-syntirisi-klimatistikon'],
+  ['Το ψυγείο δεν ψύχει;', 'episkevi-psygeion'],
+  ['Ο φούρνος δεν ζεσταίνει;', 'episkevi-ilektrikon-kouzinon'],
+];
+---
+
+<section class="soft-section problems">
+  <div class="container section">
+    <p class="eyebrow">ΑΠΟ ΠΟΥ ΝΑ ΞΕΚΙΝΗΣΕΤΕ</p>
+    <h2>Κάτι δεν λειτουργεί σωστά;</h2>
+    <div class="problem-grid">
+      {problems.map(([label, slug]) => (
+        <a href={serviceUrl(slug)}>{label}<span aria-hidden="true">↗</span></a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .problems {
+    --p-blue: var(--blue, #0ea5e9);
+    --p-ink: var(--text, #0f172a);
+  }
+
+  .problems h2 {
+    letter-spacing: -0.02em;
+  }
+
+  .problem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  }
+@media (max-width: 640px) {
+  .problem-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.problem-grid a:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+  .problem-grid a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.3rem;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, 0.09);
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+    color: var(--p-ink);
+    font-weight: 600;
+    line-height: 1.35;
+    text-decoration: none;
+    overflow: hidden;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  /* Blue accent bar that grows in on hover */
+  .problem-grid a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--p-blue);
+    transform: scaleY(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
+  }
+
+  .problem-grid a:hover,
+  .problem-grid a:focus-visible {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--p-blue) 40%, transparent);
+    box-shadow: 0 14px 30px color-mix(in srgb, var(--p-blue) 16%, transparent);
+  }
+
+  .problem-grid a:hover::before,
+  .problem-grid a:focus-visible::before {
+    transform: scaleY(1);
+  }
+
+  .problem-grid a:focus-visible {
+    outline: 2px solid var(--p-blue);
+    outline-offset: 3px;
+  }
+
+  /* The ↗ becomes a circle that fills with blue on hover */
+  .problem-grid a span {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--p-blue);
+    background: color-mix(in srgb, var(--p-blue) 10%, white);
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  }
+
+  .problem-grid a:hover span,
+  .problem-grid a:focus-visible span {
+    color: #fff;
+    background: var(--p-blue);
+    transform: rotate(45deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .problem-grid a,
+    .problem-grid a::before,
+    .problem-grid a span {
+      transition: none;
+    }
+    .problem-grid a:hover {
+      transform: none;
+    }
+  }
+</style>

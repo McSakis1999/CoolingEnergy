@@ -2,9 +2,183 @@
 import { galleryPhotos } from '../data/gallery.js';
 import { withBase } from '../utils/urls.js';
 ---
-<section id="gallery" class="soft-section"><div class="section container">
+<section id="gallery" class="soft-section gallery"><div class="section container">
 <div class="section-heading"><div><p class="eyebrow">ΑΝΘΡΩΠΟΙ & ΕΡΓΑΣΙΕΣ</p><h2>Η CoolingEnergy από κοντά.</h2></div><p>Ο Γιώργος, η ομάδα και εικόνες από τη δουλειά μας.</p></div>
 <div class="gallery-grid">{galleryPhotos.map(photo=><a class="gallery-card-link" href={withBase(photo.href)}><figure>{photo.src ? <img src={withBase(photo.src)} alt={photo.alt} width="720" height="540" loading="lazy" /> : <div class="photo-placeholder"><span aria-hidden="true">＋</span><p>Η φωτογραφία θα προστεθεί σύντομα</p></div>}<figcaption><h3>{photo.title}</h3><p>{photo.caption}</p><span class="card-link">Δείτε περισσότερα <span aria-hidden="true">→</span></span></figcaption></figure></a>)}</div>
 </div></section>
 
-<style>.gallery-card-link{display:block;border-radius:12px}.gallery-card-link figure{height:100%;transition:border-color .15s}.gallery-card-link:hover figure{border-color:var(--blue)}.gallery-card-link:focus-visible{outline:3px solid var(--blue);outline-offset:5px}</style>
+<style>
+.gallery{
+  --g-blue:var(--blue,#0ea5e9);
+  --g-blue-2:#22d3ee;
+  --g-ink:var(--text,#0f172a);
+  --g-muted:var(--muted,#526075);
+  --g-border:rgba(15,23,42,.09);
+}
+
+/* ---------- Heading ---------- */
+.gallery .eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:.75rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  color:var(--g-blue);
+}
+.gallery .eyebrow::before{
+  content:"";
+  width:32px;
+  height:2px;
+  border-radius:2px;
+  background:currentColor;
+}
+.gallery .section-heading h2{letter-spacing:-.02em;color:var(--g-ink)}
+.gallery .section-heading > p{color:var(--g-muted);line-height:1.7}
+
+/* ---------- Card ---------- */
+.gallery-card-link{
+  display:block;
+  border-radius:22px;
+  text-decoration:none;
+  color:var(--g-ink);
+}
+
+.gallery-card-link figure{
+  position:relative;
+  height:100%;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border-radius:22px;
+  background:#fff;
+  border:1px solid var(--g-border);
+  box-shadow:0 4px 14px rgba(15,23,42,.05);
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+
+/* blue gradient line sweeping along the bottom */
+.gallery-card-link figure::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--g-blue),var(--g-blue-2));
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .35s ease;
+}
+
+.gallery-card-link:hover figure,
+.gallery-card-link:focus-visible figure{
+  transform:translateY(-6px);
+  border-color:color-mix(in srgb,var(--g-blue) 35%,transparent);
+  box-shadow:0 22px 44px color-mix(in srgb,var(--g-blue) 18%,transparent);
+}
+
+.gallery-card-link:hover figure::after,
+.gallery-card-link:focus-visible figure::after{transform:scaleX(1)}
+
+.gallery-card-link:focus-visible{
+  outline:3px solid var(--g-blue);
+  outline-offset:5px;
+}
+
+/* ---------- Image ---------- */
+.gallery-card-link figure img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1);
+}
+
+.gallery-card-link:hover figure img{transform:scale(1.06)}
+
+/* keep the zoom inside the card: wrap effect via clip on the figure (overflow:hidden above) */
+
+/* ---------- Placeholder ---------- */
+.gallery-card-link .photo-placeholder{
+  display:grid;
+  place-content:center;
+  justify-items:center;
+  gap:.6rem;
+  aspect-ratio:4/3;
+  padding:1.5rem;
+  text-align:center;
+  color:var(--g-muted);
+  background:
+    radial-gradient(circle at 30% 20%,color-mix(in srgb,var(--g-blue-2) 18%,transparent),transparent 60%),
+    color-mix(in srgb,var(--g-blue) 6%,white);
+  border-bottom:1px dashed color-mix(in srgb,var(--g-blue) 30%,transparent);
+}
+
+.gallery-card-link .photo-placeholder span{
+  display:grid;
+  place-items:center;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  font-size:1.4rem;
+  line-height:1;
+  color:var(--g-blue);
+  background:#fff;
+  box-shadow:0 8px 18px color-mix(in srgb,var(--g-blue) 22%,transparent);
+}
+
+.gallery-card-link .photo-placeholder p{
+  margin:0;
+  font-size:.85rem;
+  font-weight:600;
+}
+
+/* ---------- Caption ---------- */
+.gallery-card-link figcaption{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  padding:22px 24px 24px;
+}
+
+.gallery-card-link figcaption h3{
+  margin:0 0 .4rem;
+  font-size:1.15rem;
+  line-height:1.3;
+  letter-spacing:-.01em;
+  color:var(--g-ink);
+}
+
+.gallery-card-link figcaption p{
+  margin:0 0 1.1rem;
+  line-height:1.65;
+  color:var(--g-muted);
+}
+
+.gallery-card-link .card-link{
+  margin-top:auto;
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  font-weight:700;
+  color:var(--g-blue);
+}
+
+.gallery-card-link .card-link span{transition:transform .25s ease}
+.gallery-card-link:hover .card-link span{transform:translateX(5px)}
+
+@media(max-width:760px){
+  .gallery-card-link figcaption{padding:20px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .gallery-card-link figure,
+  .gallery-card-link figure::after,
+  .gallery-card-link figure img,
+  .gallery-card-link .card-link span{transition:none}
+  .gallery-card-link:hover figure{transform:none}
+  .gallery-card-link:hover figure img{transform:none}
+}
+</style>

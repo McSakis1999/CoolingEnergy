@@ -1,14 +1,517 @@
-<section class="hero">
-<div class="container hero-grid">
-<div><p class="eyebrow">ΒΟΛΟΣ & ΠΗΛΙΟ · COOLINGENERGY</p>
-<h1>Επισκευές οικιακών συσκευών &amp; κλιματισμός.<br /><em>Στον Βόλο και το Πήλιο.</em></h1>
-<p class="hero-copy">Ο Γιώργος Μούτος αναλαμβάνει κλιματιστικά, ψυγεία, πλυντήρια ρούχων και ηλεκτρικές κουζίνες στον Βόλο και το Πήλιο.</p>
-<div class="actions"><a class="button" href="#services">Βρείτε την υπηρεσία σας <span aria-hidden="true">↓</span></a><a class="text-link" href="#contact">Επικοινωνία <span aria-hidden="true">↗</span></a></div>
-<p class="hero-note">Κλιματιστικά / Ψυγεία / Πλυντήρια / Κουζίνες</p></div>
-<div class="hero-art" aria-hidden="true"><div class="art-top"><span>COOLINGENERGY</span><span>01 / HOME</span></div>
-<div class="ac-unit"><span></span><i></i><b></b></div><div class="air-lines"><i></i><i></i><i></i></div>
-<div class="washer-unit"><div class="washer-controls"><i></i><span>•••</span></div><div class="washer-door"><div></div></div><div class="washer-bottom"></div></div>
-<div class="art-caption"><span>Μια πιο άνετη<br /><strong>καθημερινότητα.</strong></span><span class="art-mark">↗</span></div>
-</div>
-</div>
+<section class="hero-modern">
+  <div class="hero-bg" aria-hidden="true">
+    <span class="hero-orb hero-orb--1"></span>
+    <span class="hero-orb hero-orb--2"></span>
+    <span class="hero-grid-lines"></span>
+  </div>
+
+  <div class="container hero-layout">
+    <!-- Content -->
+    <div class="hero-content">
+      <p class="eyebrow">ΒΟΛΟΣ &amp; ΠΗΛΙΟ · COOLINGENERGY</p>
+      <h1 class="hero-title">
+        Επισκευές οικιακών συσκευών &amp; κλιματισμός.<br />
+        <em>Στον Βόλο και το Πήλιο.</em>
+      </h1>
+      <p class="hero-copy">
+        Ο Γιώργος Μούτος αναλαμβάνει κλιματιστικά, ψυγεία, πλυντήρια ρούχων και
+        ηλεκτρικές κουζίνες στον Βόλο και το Πήλιο.
+      </p>
+
+      <div class="hero-actions">
+        <a class="hero-btn" href="#services">
+          Βρείτε την υπηρεσία σας
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </a>
+        <a class="hero-link" href="#contact">
+          Επικοινωνία
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+            <path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </a>
+      </div>
+
+      <ul class="hero-chips">
+        <li>Κλιματιστικά</li>
+        <li>Ψυγεία</li>
+        <li>Πλυντήρια</li>
+        <li>Κουζίνες</li>
+      </ul>
+    </div>
+
+    <!-- Art -->
+    <div class="hero-art-modern" aria-hidden="true">
+      <div class="art-card">
+        <div class="art-top">
+          <span class="ml-auto">COOLINGENERGY</span>
+        </div>
+
+        <div class="art-ac">
+          <div class="art-ac-body">
+            <span class="art-ac-slot"></span>
+            <i class="art-ac-led"></i>
+            <b class="art-ac-flap"></b>
+          </div>
+          <div class="art-air">
+            <i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+
+        <div class="art-washer">
+          <div class="art-washer-controls">
+            <i></i><span>•••</span>
+          </div>
+          <div class="art-washer-door"><div></div></div>
+        </div>
+
+        <div class="art-caption">
+          <span>Μια πιο άνετη<br /><strong>καθημερινότητα.</strong></span>
+          <span class="art-mark">
+            <svg viewBox="0 0 24 24" width="18" height="18">
+              <path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="art-badge art-badge--top">
+        <span class="art-dot"></span>
+        Βόλος &amp; Πήλιο
+      </div>
+      <div class="art-badge art-badge--bottom">
+        <strong>Εγκατάσταση</strong>
+        <span>Καθαρισμός · Επισκευή</span>
+      </div>
+    </div>
+  </div>
 </section>
+
+<style>
+  .hero-modern {
+    --h-blue: var(--blue, #0ea5e9);
+    --h-blue-2: #22d3ee;
+    --h-ink: var(--text, #0f172a);
+    --h-muted: var(--muted, #526075);
+    --h-card: rgba(255, 255, 255, 0.72);
+    --h-border: rgba(15, 23, 42, 0.08);
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3rem, 8vw, 6.5rem);
+    isolation: isolate;
+  }
+
+  /* ---------- Background ---------- */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.45;
+  }
+
+  .hero-orb--1 {
+    width: 460px;
+    height: 460px;
+    top: -140px;
+    right: -100px;
+    background: var(--h-blue-2);
+  }
+
+  .hero-orb--2 {
+    width: 380px;
+    height: 380px;
+    bottom: -160px;
+    left: -120px;
+    background: var(--h-blue);
+    opacity: 0.25;
+  }
+
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 70% 40%, #000 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 70% 40%, #000 20%, transparent 70%);
+  }
+
+  /* ---------- Layout ---------- */
+  .hero-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  @media (min-width: 960px) {
+    .hero-layout {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+  }
+
+  /* ---------- Content ---------- */
+  .hero-title {
+    margin: 0 0 1.25rem;
+    font-size: clamp(2.1rem, 5.2vw, 4rem);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--h-ink);
+  }
+
+  .hero-title em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--h-blue), var(--h-blue-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero-copy {
+    margin: 0 0 2rem;
+    max-width: 52ch;
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    line-height: 1.7;
+    color: var(--h-muted);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.5rem;
+    border-radius: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg, var(--h-blue), color-mix(in srgb, var(--h-blue) 70%, #1e3a8a));
+    box-shadow: 0 14px 28px color-mix(in srgb, var(--h-blue) 40%, transparent);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .hero-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px color-mix(in srgb, var(--h-blue) 50%, transparent);
+  }
+
+  .hero-btn svg {
+    transition: transform 0.25s ease;
+  }
+
+  .hero-btn:hover svg {
+    transform: translateY(3px);
+  }
+
+  .hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--h-ink);
+    padding-bottom: 2px;
+    border-bottom: 2px solid color-mix(in srgb, var(--h-blue) 45%, transparent);
+    transition: border-color 0.25s ease, color 0.25s ease;
+  }
+
+  .hero-link:hover {
+    color: var(--h-blue);
+    border-color: var(--h-blue);
+  }
+
+  .hero-chips {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero-chips li {
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--h-ink);
+    background: color-mix(in srgb, var(--h-blue) 10%, white);
+    border: 1px solid color-mix(in srgb, var(--h-blue) 25%, transparent);
+  }
+
+  /* ---------- Art ---------- */
+  .hero-art-modern {
+    position: relative;
+    max-width: 480px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .art-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    min-height: 460px;
+    border-radius: 32px;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.25), transparent 55%),
+      linear-gradient(150deg, var(--h-blue), color-mix(in srgb, var(--h-blue) 55%, #1e3a8a));
+    box-shadow: 0 30px 60px color-mix(in srgb, var(--h-blue) 35%, transparent);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .art-top {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    opacity: 0.85;
+  }
+
+  /* AC */
+  .art-ac {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: 0.6rem;
+    justify-items: center;
+  }
+
+  .art-ac-body {
+    position: relative;
+    width: 100%;
+    height: 96px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #ffffff, #e6eef7);
+    box-shadow: 0 18px 30px rgba(2, 6, 23, 0.25), inset 0 -6px 0 rgba(15, 23, 42, 0.05);
+  }
+
+  .art-ac-slot {
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: 16px;
+    height: 10px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #cbd5e1, #94a3b8);
+  }
+
+  .art-ac-flap {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 10px;
+    height: 6px;
+    border-radius: 999px;
+    background: #fff;
+    transform-origin: top center;
+    /* transform: rotate(6deg); */
+    box-shadow: 0 4px 8px rgba(2, 6, 23, 0.15);
+  }
+
+  .art-ac-led {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 10px #22c55e;
+  }
+
+  .art-air {
+    display: flex;
+    gap: 1.2rem;
+    height: 46px;
+  }
+
+  .art-air i {
+    width: 3px;
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), transparent);
+    animation: air 2.4s ease-in-out infinite;
+    transform-origin: top;
+  }
+
+  .art-air i:nth-child(2) { animation-delay: -0.6s; }
+  .art-air i:nth-child(3) { animation-delay: -1.2s; }
+  .art-air i:nth-child(4) { animation-delay: -1.8s; }
+
+  /* Washer */
+  .art-washer {
+    grid-column: 2;
+    align-self: end;
+    padding: 0.7rem;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #ffffff, #e6eef7);
+    box-shadow: 0 14px 24px rgba(2, 6, 23, 0.22);
+    color: var(--h-ink);
+  }
+
+  .art-washer-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: #94a3b8;
+  }
+
+  .art-washer-controls i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--h-blue);
+  }
+
+  .art-washer-door {
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #cbd5e1, #f8fafc);
+    padding: 12%;
+  }
+
+  .art-washer-door div {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.7), transparent 40%),
+      linear-gradient(145deg, var(--h-blue-2), var(--h-blue));
+    animation: drum 6s ease-in-out infinite alternate;
+  }
+
+  .art-caption {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: end;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .art-caption strong {
+    font-size: 1.15rem;
+  }
+
+  .art-mark {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+  }
+
+  /* Badges */
+  .art-badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    background: var(--h-card);
+    border: 1px solid var(--h-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.16);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--h-ink);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .art-badge--top {
+    top: 12%;
+    left: -6%;
+  }
+
+  .art-badge--bottom {
+    bottom: 10%;
+    right: -4%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+    border-radius: 18px;
+    animation-delay: -3s;
+  }
+
+  .art-badge--bottom span {
+    font-weight: 500;
+    font-size: 0.78rem;
+    color: var(--h-muted);
+  }
+
+  .art-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: pulse 2s infinite;
+  }
+
+  @media (max-width: 520px) {
+    .art-badge--top { left: 0; }
+    .art-badge--bottom { right: 0; }
+    .art-card { min-height: 400px; }
+  }
+
+  /* ---------- Animations ---------- */
+  @keyframes air {
+    0%   { transform: scaleY(0.3); opacity: 0; }
+    40%  { opacity: 1; }
+    100% { transform: scaleY(1); opacity: 0; }
+  }
+  @keyframes drum {
+    to { transform: rotate(25deg); }
+  }
+  @keyframes float {
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+    70%  { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .art-air i,
+    .art-washer-door div,
+    .art-badge,
+    .art-dot {
+      animation: none;
+    }
+  }
+</style>

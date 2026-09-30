@@ -3,21 +3,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Brands from '../components/Brands.astro';
 import Process from '../components/Process.astro';
 import Gallery from '../components/Gallery.astro';
-import { generalFaqs } from '../data/faqs.js';
-import { withBase } from '../utils/urls.js';
+import Faq from '../components/Faq.astro';
 import Hero from '../components/Hero.astro';
 import Services from '../components/Services.astro';
 import About from '../components/About.astro';
 import ServiceAreas from '../components/ServiceAreas.astro';
 import ContactForm from '../components/ContactForm.astro';
-import { serviceUrl } from '../utils/urls.js';
+import CommonProblems from '../components/CommonProblems.astro';
 import { generateHvacSchema } from '../utils/schema.js';
-const problems = [['Δεν αποδίδει το κλιματιστικό;','episkevi-klimatistikon'],['Το πλυντήριο δεν στύβει;','episkevi-plyntirion'],['Ώρα για καθαρισμό A/C;','katharismos-syntirisi-klimatistikon'],['Το ψυγείο δεν ψύχει;','episkevi-psygeion'],['Ο φούρνος δεν ζεσταίνει;','episkevi-ilektrikon-kouzinon']];
 ---
 <BaseLayout><script type="application/ld+json" slot="schema" set:html={JSON.stringify(generateHvacSchema())} />
 <Hero /><Brands /><Services />
-<section class="soft-section"><div class="container section"><p class="eyebrow">ΑΠΟ ΠΟΥ ΝΑ ΞΕΚΙΝΗΣΕΤΕ</p><h2>Κάτι δεν λειτουργεί σωστά;</h2><div class="problem-grid">{problems.map(([label,slug])=><a href={serviceUrl(slug)}>{label}<span aria-hidden="true">↗</span></a>)}</div></div></section>
+<CommonProblems />
 <Process />
 <About /><Gallery /><ServiceAreas />
-<section id="faq" class="section container faq-section"><div><p class="eyebrow">ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ · FAQ</p><h2>Πριν από το ραντεβού.</h2><a class="text-link" href={withBase("faq/")}>Όλες οι ερωτήσεις ανά συσκευή →</a></div><div>{generalFaqs.slice(0,5).map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div></section>
+<Faq />
 <ContactForm /></BaseLayout>
